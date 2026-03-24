@@ -1,0 +1,9 @@
+/* === BASE CSS === */
+
+#root,#root *,#root *::before,#root *::after{box-sizing:border-box;margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;line-height:normal;text-decoration:none;color:inherit;background:transparent}
+#root{display:block;background:#fff;color:#1d1d1f;font-family:'Noto Sans JP',system-ui,sans-serif;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:anywhere;width:100%;max-width:none}
+
+#root a{color:inherit;text-decoration:none}
+#root img{max-width:100%;height:auto;border:none}
+#root ul,#root ol{list-style:none}
+::selection{background:rgba(26,75,142,0.2);color:#1d1d1f}

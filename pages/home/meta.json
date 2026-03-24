@@ -1,0 +1,35 @@
+{
+  "title": "株式会社飯田丸光部品｜長野県飯田市の自動車部品・工具卸売",
+  "description": "長野県飯田市で昭和53年から続く自動車部品・工具の専門卸。地元整備工場を支える確かな品揃えと迅速な対応。本店（飯田市大久保町）と生田店の2拠点で営業中。",
+  "canonical": "https://iidamarumitsu.jp/",
+  "og": {
+    "title": "株式会社飯田丸光部品｜自動車部品・工具卸売",
+    "description": "長野県飯田市で昭和53年から続く自動車部品・工具の専門卸。",
+    "type": "website",
+    "url": "https://iidamarumitsu.jp/",
+    "siteName": "飯田丸光部品",
+    "locale": "ja_JP"
+  },
+  "siteBase": "/",
+  "structuredData": {
+    "@context": "https://schema.org",
+    "@type": "AutoPartsStore",
+    "name": "株式会社飯田丸光部品",
+    "url": "https://iidamarumitsu.jp/",
+    "description": "長野県飯田市の自動車部品・工具の専門卸売業。昭和53年創業。",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "大久保町2565-6",
+      "addressLocality": "飯田市",
+      "addressRegion": "長野県",
+      "postalCode": "395-0053",
+      "addressCountry": "JP"
+    },
+    "telephone": "0265-23-1231",
+    "foundingDate": "1978",
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "株式会社SPREAD"
+    }
+  }
+}
