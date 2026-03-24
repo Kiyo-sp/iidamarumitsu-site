@@ -10,7 +10,7 @@
     "siteName": "飯田丸光部品",
     "locale": "ja_JP"
   },
-  "siteBase": "/",
+  "siteBase": "./",
   "structuredData": {
     "@context": "https://schema.org",
     "@type": "AutoPartsStore",

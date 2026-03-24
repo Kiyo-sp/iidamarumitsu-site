@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>株式会社飯田丸光部品｜長野県飯田市の自動車部品・工具卸売</title>
+<meta name="description" content="長野県飯田市で昭和53年から続く自動車部品・工具の専門卸。地元整備工場を支える確かな品揃えと迅速な対応。本店（飯田市大久保町）と生田店の2拠点で営業中。">
+<meta property="og:title" content="株式会社飯田丸光部品｜自動車部品・工具卸売">
+<meta property="og:description" content="長野県飯田市で昭和53年から続く自動車部品・工具の専門卸。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://iidamarumitsu.jp/">
+<meta property="og:site_name" content="飯田丸光部品">
+<meta property="og:locale" content="ja_JP">
+<link rel="canonical" href="https://iidamarumitsu.jp/">
+<meta name="robots" content="index, follow">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoPartsStore",
+  "name": "株式会社飯田丸光部品",
+  "url": "https://iidamarumitsu.jp/",
+  "description": "長野県飯田市の自動車部品・工具の専門卸売業。昭和53年創業。",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "大久保町2565-6",
+    "addressLocality": "飯田市",
+    "addressRegion": "長野県",
+    "postalCode": "395-0053",
+    "addressCountry": "JP"
+  },
+  "telephone": "0265-23-1231",
+  "foundingDate": "1978",
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "株式会社SPREAD"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap">
+<style>
+/* === BASE CSS === */
+
+#root,#root *,#root *::before,#root *::after{box-sizing:border-box;margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;line-height:normal;text-decoration:none;color:inherit;background:transparent}
+#root{display:block;background:#fff;color:#1d1d1f;font-family:'Noto Sans JP',system-ui,sans-serif;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:anywhere;width:100%;max-width:none}
+
+#root a{color:inherit;text-decoration:none}
+#root img{max-width:100%;height:auto;border:none}
+#root ul,#root ol{list-style:none}
+::selection{background:rgba(26,75,142,0.2);color:#1d1d1f}
+
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script>
+var { useState, useEffect, useRef, useCallback } = React;
+var SITE_BASE = "./";
+</script>
+<script src="./shared.js"></script>
+<script>
+/* === IIDA MARUMITSU BUHIN -- HOME PAGE === */
+
+function HomePage() {
+  var w = useWinW();
+  var isMobile = w < 768;
+
+  /* ── Company data ── */
+  var companyInfo = [
+    { label: "\u4F1A\u793E\u540D", value: "\u682A\u5F0F\u4F1A\u793E\u98EF\u7530\u4E38\u5149\u90E8\u54C1" },
+    { label: "\u4EE3\u8868\u8005", value: "\u6C34\u5DDD\u614E\u4E5F" },
+    { label: "\u5275\u696D", value: "\u662D\u548C53\u5E74\uFF081978\u5E74\uFF093\u6708" },
+    { label: "\u6240\u5728\u5730", value: "\u3012395-0053 \u9577\u91CE\u770C\u98EF\u7530\u5E02\u5927\u4E45\u4FDD\u753A2565-6" },
+    { label: "TEL", value: "0265-23-1231" },
+    { label: "\u4E8B\u696D\u5185\u5BB9", value: "\u81EA\u52D5\u8ECA\u90E8\u54C1\u30FB\u5DE5\u5177\u5378\u58F2\u696D" },
+    { label: "\u53D6\u5F15\u9280\u884C", value: "\u98EF\u7530\u4FE1\u7528\u91D1\u5EAB\u3001\u516B\u5341\u4E8C\u9280\u884C" },
+    { label: "\u30B0\u30EB\u30FC\u30D7", value: "\u682A\u5F0F\u4F1A\u793ASPREAD" }
+  ];
+
+  /* ── Section: Hero ── */
+  function HeroSection() {
+    return React.createElement("section", {
+      style: {
+        minHeight: isMobile ? "70vh" : "80vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        padding: isMobile ? "100px 24px 60px" : "140px 24px 80px",
+        background: "linear-gradient(170deg, #f5f7fa 0%, #ffffff 40%, #f0f4f8 100%)",
+        position: "relative",
+        overflow: "hidden"
+      }
+    },
+      /* Subtle grid pattern */
+      React.createElement("div", {
+        style: {
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "radial-gradient(circle, " + COLOR.border + " 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+          opacity: 0.4,
+          pointerEvents: "none"
+        }
+      }),
+
+      /* Accent line */
+      React.createElement(Reveal, null,
+        React.createElement("div", {
+          style: { width: 40, height: 4, background: COLOR.accent, borderRadius: 2, margin: "0 auto 24px" }
+        })
+      ),
+
+      /* Company name */
+      React.createElement(Reveal, { delay: 0.1 },
+        React.createElement("h1", {
+          style: {
+            fontFamily: FONT,
+            fontSize: isMobile ? 28 : 48,
+            fontWeight: 900,
+            lineHeight: 1.2,
+            letterSpacing: isMobile ? 2 : 4,
+            marginBottom: 20,
+            color: COLOR.text
+          }
+        }, "\u98EF\u7530\u4E38\u5149\u90E8\u54C1")
+      ),
+
+      /* English name */
+      React.createElement(Reveal, { delay: 0.2 },
+        React.createElement("p", {
+          style: {
+            fontFamily: FONT,
+            fontSize: isMobile ? 11 : 13,
+            color: COLOR.textMuted,
+            letterSpacing: 4,
+            marginBottom: 32,
+            textTransform: "uppercase"
+          }
+        }, "IIDA MARUMITSU BUHIN")
+      ),
+
+      /* Tagline */
+      React.createElement(Reveal, { delay: 0.3 },
+        React.createElement("p", {
+          style: {
+            fontFamily: FONT,
+            fontSize: isMobile ? 15 : 20,
+            color: COLOR.textSub,
+            lineHeight: 1.8,
+            maxWidth: 520
+          }
+        }, "\u662D\u548C53\u5E74\u5275\u696D\u3002\u9577\u91CE\u770C\u98EF\u7530\u5E02\u3067\n\u81EA\u52D5\u8ECA\u90E8\u54C1\u30FB\u5DE5\u5177\u306E\u5C02\u9580\u5378\u3092\u55B6\u3093\u3067\u3044\u307E\u3059\u3002")
+      ),
+
+      /* Scroll hint */
+      React.createElement(Reveal, { delay: 0.6 },
+        React.createElement("div", {
+          style: {
+            marginTop: 48,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 8,
+            color: COLOR.textMuted,
+            fontSize: 12,
+            fontFamily: FONT
+          }
+        },
+          "SCROLL",
+          React.createElement("div", {
+            style: {
+              width: 1,
+              height: 32,
+              background: "linear-gradient(180deg, " + COLOR.textMuted + ", transparent)"
+            }
+          })
+        )
+      )
+    );
+  }
+
+  /* ── Section: About ── */
+  function AboutSection() {
+    var features = [
+      {
+        icon: "\uD83D\uDE97",
+        title: "\u8C4A\u5BCC\u306A\u54C1\u63C3\u3048",
+        desc: "\u56FD\u7523\u8ECA\u30FB\u8F38\u5165\u8ECA\u5411\u3051\u306E\u81EA\u52D5\u8ECA\u90E8\u54C1\u3001\u6574\u5099\u7528\u5DE5\u5177\u3001\u6D88\u8017\u54C1\u307E\u3067\u5E45\u5E83\u304F\u53D6\u308A\u63C3\u3048\u3066\u3044\u307E\u3059\u3002"
+      },
+      {
+        icon: "\u26A1",
+        title: "\u8FC5\u901F\u306A\u5BFE\u5FDC",
+        desc: "\u5730\u5143\u306E\u6574\u5099\u5DE5\u5834\u3084\u30C7\u30A3\u30FC\u30E9\u30FC\u3078\u3001\u5FC5\u8981\u306A\u90E8\u54C1\u3092\u7D20\u65E9\u304F\u304A\u5C4A\u3051\u3057\u307E\u3059\u3002"
+      },
+      {
+        icon: "\uD83E\uDD1D",
+        title: "\u78BA\u304B\u306A\u4FE1\u983C",
+        desc: "\u5275\u696D\u304B\u308945\u5E74\u4EE5\u4E0A\u3001\u5730\u57DF\u306E\u81EA\u52D5\u8ECA\u6574\u5099\u696D\u754C\u3092\u652F\u3048\u7D9A\u3051\u3066\u3044\u307E\u3059\u3002"
+      }
+    ];
+
+    return React.createElement("section", {
+      style: {
+        padding: isMobile ? "72px 24px" : "100px 24px",
+        background: COLOR.bg
+      }
+    },
+      React.createElement("div", { style: MAX_W },
+        React.createElement(Reveal, null,
+          React.createElement("div", { style: { textAlign: "center", marginBottom: 48 } },
+            React.createElement(SectionLabel, { color: COLOR.accent }, "ABOUT"),
+            React.createElement(SectionTitle, {
+              sub: "\u98EF\u7530\u5E02\u3092\u62E0\u70B9\u306B\u3001\u5730\u5143\u306E\u81EA\u52D5\u8ECA\u6574\u5099\u5DE5\u5834\u3084\u30C7\u30A3\u30FC\u30E9\u30FC\u3092\u652F\u3048\u308B\u81EA\u52D5\u8ECA\u90E8\u54C1\u30FB\u5DE5\u5177\u306E\u5C02\u9580\u5378\u58F2\u4F1A\u793E\u3067\u3059\u3002"
+            }, "\u79C1\u305F\u3061\u306B\u3064\u3044\u3066")
+          )
+        ),
+        React.createElement("div", {
+          style: {
+            display: "grid",
+            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr",
+            gap: 24,
+            maxWidth: 800,
+            margin: "0 auto"
+          }
+        },
+          features.map(function(f, i) {
+            return React.createElement(Reveal, { key: i, delay: i * 0.1 },
+              React.createElement("div", {
+                style: {
+                  padding: 28,
+                  background: COLOR.surface,
+                  border: "1px solid " + COLOR.border,
+                  borderRadius: 16,
+                  textAlign: "center"
+                }
+              },
+                React.createElement("div", {
+                  style: { fontSize: 32, marginBottom: 16 }
+                }, f.icon),
+                React.createElement("div", {
+                  style: {
+                    fontFamily: FONT,
+                    fontSize: 15,
+                    fontWeight: 700,
+                    color: COLOR.text,
+                    marginBottom: 10
+                  }
+                }, f.title),
+                React.createElement("div", {
+                  style: {
+                    fontFamily: FONT,
+                    fontSize: 13,
+                    color: COLOR.textSub,
+                    lineHeight: 1.7
+                  }
+                }, f.desc)
+              )
+            );
+          })
+        )
+      )
+    );
+  }
+
+  /* ── Section: Company Info ── */
+  function CompanyInfoSection() {
+    return React.createElement("section", {
+      style: {
+        padding: isMobile ? "72px 24px" : "100px 24px",
+        background: COLOR.surfaceAlt
+      }
+    },
+      React.createElement("div", { style: MAX_W },
+        React.createElement(Reveal, null,
+          React.createElement("div", { style: { textAlign: "center", marginBottom: 48 } },
+            React.createElement(SectionLabel, null, "COMPANY"),
+            React.createElement(SectionTitle, null, "\u4F1A\u793E\u6982\u8981")
+          )
+        ),
+        React.createElement(Reveal, { delay: 0.15 },
+          React.createElement("div", {
+            style: {
+              maxWidth: 680,
+              margin: "0 auto",
+              border: "1px solid " + COLOR.border,
+              borderRadius: 16,
+              overflow: "hidden",
+              background: COLOR.white
+            }
+          },
+            companyInfo.map(function(row, i) {
+              return React.createElement("div", {
+                key: i,
+                style: {
+                  display: "flex",
+                  flexDirection: isMobile ? "column" : "row",
+                  borderBottom: i < companyInfo.length - 1 ? "1px solid " + COLOR.border : "none"
+                }
+              },
+                React.createElement("div", {
+                  style: {
+                    fontFamily: FONT,
+                    fontSize: 13,
+                    fontWeight: 700,
+                    color: COLOR.textSub,
+                    padding: isMobile ? "14px 20px 4px" : "14px 24px",
+                    minWidth: isMobile ? "auto" : 140,
+                    background: isMobile ? "transparent" : COLOR.surfaceAlt
+                  }
+                }, row.label),
+                React.createElement("div", {
+                  style: {
+                    fontFamily: FONT,
+                    fontSize: 14,
+                    color: COLOR.text,
+                    padding: isMobile ? "4px 20px 14px" : "14px 24px",
+                    lineHeight: 1.7,
+                    flex: 1
+                  }
+                }, row.value)
+              );
+            })
+          )
+        )
+      )
+    );
+  }
+
+  /* ── Section: Locations ── */
+  function LocationsSection() {
+    var locations = [
+      {
+        name: "\u672C\u5E97",
+        address: "\u3012395-0053 \u9577\u91CE\u770C\u98EF\u7530\u5E02\u5927\u4E45\u4FDD\u753A2565-6",
+        tel: "0265-23-1231",
+        mapQuery: "%E9%95%B7%E9%87%8E%E7%9C%8C%E9%A3%AF%E7%94%B0%E5%B8%82%E5%A4%A7%E4%B9%85%E4%BF%9D%E7%94%BA2565-6"
+      },
+      {
+        name: "\u751F\u7530\u5E97",
+        address: "\u3012399-3302 \u9577\u91CE\u770C\u4E0B\u4F0A\u90A3\u90E1\u677E\u5DDD\u753A\u751F\u7530900-1",
+        tel: null,
+        mapQuery: "%E9%95%B7%E9%87%8E%E7%9C%8C%E4%B8%8B%E4%BC%8A%E9%82%A3%E9%83%A1%E6%9D%BE%E5%B7%9D%E7%94%BA%E7%94%9F%E7%94%B0900-1"
+      }
+    ];
+
+    return React.createElement("section", {
+      style: {
+        padding: isMobile ? "72px 24px" : "100px 24px",
+        background: COLOR.bg
+      }
+    },
+      React.createElement("div", { style: MAX_W },
+        React.createElement(Reveal, null,
+          React.createElement("div", { style: { textAlign: "center", marginBottom: 48 } },
+            React.createElement(SectionLabel, { color: COLOR.accent }, "LOCATIONS"),
+            React.createElement(SectionTitle, {
+              sub: "\u98EF\u7530\u672C\u5E97\u3068\u751F\u7530\u5E97\u306E2\u62E0\u70B9\u3067\u55B6\u696D\u3057\u3066\u3044\u307E\u3059\u3002"
+            }, "\u5E97\u8217\u60C5\u5831")
+          )
+        ),
+
+        React.createElement("div", {
+          style: {
+            display: "grid",
+            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+            gap: 24,
+            maxWidth: 800,
+            margin: "0 auto"
+          }
+        },
+          locations.map(function(loc, i) {
+            return React.createElement(Reveal, { key: i, delay: i * 0.15 },
+              React.createElement("div", {
+                style: {
+                  border: "1px solid " + COLOR.border,
+                  borderRadius: 16,
+                  overflow: "hidden",
+                  background: COLOR.white
+                }
+              },
+                /* Map */
+                loc.mapQuery
+                  ? React.createElement("div", {
+                      style: { aspectRatio: "16/10", background: COLOR.surfaceAlt }
+                    },
+                      React.createElement("iframe", {
+                        src: "https://www.google.com/maps?q=" + loc.mapQuery + "&output=embed",
+                        width: "100%",
+                        height: "100%",
+                        style: { border: 0 },
+                        allowFullScreen: true,
+                        loading: "lazy",
+                        referrerPolicy: "no-referrer-when-downgrade"
+                      })
+                    )
+                  : React.createElement("div", {
+                      style: {
+                        aspectRatio: "16/10",
+                        background: COLOR.surfaceAlt,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontFamily: FONT,
+                        fontSize: 14,
+                        color: COLOR.textMuted
+                      }
+                    }, "\u6E96\u5099\u4E2D"),
+
+                /* Info */
+                React.createElement("div", {
+                  style: { padding: 20 }
+                },
+                  React.createElement("div", {
+                    style: {
+                      fontFamily: FONT,
+                      fontSize: 16,
+                      fontWeight: 900,
+                      color: COLOR.text,
+                      marginBottom: 8,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 8
+                    }
+                  },
+                    React.createElement("span", {
+                      style: {
+                        display: "inline-block",
+                        width: 8,
+                        height: 8,
+                        borderRadius: "50%",
+                        background: COLOR.accent
+                      }
+                    }),
+                    loc.name
+                  ),
+                  React.createElement("div", {
+                    style: {
+                      fontFamily: FONT,
+                      fontSize: 13,
+                      color: COLOR.textSub,
+                      lineHeight: 1.7
+                    }
+                  },
+                    loc.address,
+                    loc.tel && React.createElement("br"),
+                    loc.tel && ("TEL: " + loc.tel)
+                  )
+                )
+              )
+            );
+          })
+        )
+      )
+    );
+  }
+
+  /* ── Section: Online ── */
+  function OnlineSection() {
+    return React.createElement("section", {
+      style: {
+        padding: isMobile ? "56px 24px" : "80px 24px",
+        background: COLOR.surfaceAlt
+      }
+    },
+      React.createElement("div", { style: Object.assign({}, MAX_W, { textAlign: "center" }) },
+        React.createElement(Reveal, null,
+          React.createElement(SectionLabel, null, "ONLINE"),
+          React.createElement(SectionTitle, {
+            sub: "\u30E4\u30D5\u30AA\u30AF\u3067\u3082\u8CA9\u58F2\u3057\u3066\u3044\u307E\u3059\u3002\u304A\u6C17\u8EFD\u306B\u3054\u89A7\u304F\u3060\u3055\u3044\u3002"
+          }, "\u30AA\u30F3\u30E9\u30A4\u30F3\u30B7\u30E7\u30C3\u30D7")
+        ),
+        React.createElement(Reveal, { delay: 0.2 },
+          React.createElement("div", {
+            style: {
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 12,
+              marginTop: 28,
+              padding: "16px 32px",
+              background: COLOR.white,
+              border: "1px solid " + COLOR.border,
+              borderRadius: 12,
+              fontFamily: FONT,
+              fontSize: 15,
+              fontWeight: 700,
+              color: COLOR.accent
+            }
+          },
+            React.createElement("span", { style: { fontSize: 20 } }, "\uD83D\uDED2"),
+            "\u30E4\u30D5\u30AA\u30AF\u3067\u8CFC\u5165"
+          )
+        )
+      )
+    );
+  }
+
+  /* ── Section: Contact ── */
+  function ContactSection() {
+    return React.createElement("section", {
+      style: {
+        padding: isMobile ? "72px 24px" : "100px 24px",
+        background: "linear-gradient(180deg, " + COLOR.bg + ", " + COLOR.surfaceAlt + ")",
+        textAlign: "center"
+      }
+    },
+      React.createElement("div", { style: MAX_W },
+        React.createElement(Reveal, null,
+          React.createElement(SectionLabel, { color: COLOR.accent }, "CONTACT"),
+          React.createElement(SectionTitle, null, "\u304A\u554F\u3044\u5408\u308F\u305B")
+        ),
+        React.createElement(Reveal, { delay: 0.15 },
+          React.createElement("p", {
+            style: {
+              fontFamily: FONT,
+              fontSize: isMobile ? 14 : 16,
+              color: COLOR.textSub,
+              lineHeight: 1.8,
+              margin: "20px auto 36px",
+              maxWidth: 480
+            }
+          }, "\u90E8\u54C1\u306E\u304A\u53D6\u308A\u5BC4\u305B\u3001\u5728\u5EAB\u78BA\u8A8D\u306A\u3069\u304A\u6C17\u8EFD\u306B\u304A\u96FB\u8A71\u304F\u3060\u3055\u3044\u3002")
+        ),
+        React.createElement(Reveal, { delay: 0.3 },
+          React.createElement("a", {
+            href: "tel:0265-23-1231",
+            style: {
+              display: "inline-block",
+              fontFamily: FONT,
+              fontSize: isMobile ? 28 : 40,
+              fontWeight: 900,
+              color: COLOR.text,
+              textDecoration: "none",
+              letterSpacing: 2
+            }
+          }, "0265-23-1231")
+        ),
+        React.createElement(Reveal, { delay: 0.4 },
+          React.createElement("p", {
+            style: {
+              fontFamily: FONT,
+              fontSize: 13,
+              color: COLOR.textMuted,
+              marginTop: 12
+            }
+          }, "\u53D7\u4ED8\u6642\u9593: \u5E73\u65E5 8:30\uFF5E17:30")
+        )
+      )
+    );
+  }
+
+  /* ── App ── */
+  return React.createElement("div", {
+    style: { background: COLOR.bg, color: COLOR.text }
+  },
+    React.createElement(SharedNav),
+    React.createElement(HeroSection),
+    React.createElement(AboutSection),
+    React.createElement(CompanyInfoSection),
+    React.createElement(LocationsSection),
+    React.createElement(OnlineSection),
+    React.createElement(ContactSection),
+    React.createElement(SharedFooter)
+  );
+}
+
+/* ── Mount ── */
+ReactDOM.createRoot(document.getElementById("root")).render(
+  React.createElement(HomePage)
+);
+
+</script>
+</body>
+</html>
