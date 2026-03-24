@@ -1,7 +1,7 @@
 /* === SHARED NAVIGATION -- Iida Marumitsu === */
 
 function SharedNav() {
-  var scrolled = useScrolledPast(60);
+  var scrolled = useScrolledPast(80);
   var w = useWinW();
   var isMobile = w < 768;
 
@@ -12,12 +12,12 @@ function SharedNav() {
       left: 0,
       right: 0,
       zIndex: 100,
-      background: scrolled ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.8)",
+      background: scrolled ? "rgba(255,255,255,0.95)" : "rgba(12,24,41,0.6)",
       backdropFilter: "blur(16px)",
       WebkitBackdropFilter: "blur(16px)",
-      borderBottom: "1px solid " + (scrolled ? COLOR.border : "transparent"),
+      borderBottom: scrolled ? "1px solid #e5e5e5" : "1px solid rgba(255,255,255,0.08)",
       padding: "0 24px",
-      transition: "background 0.3s, border-color 0.3s"
+      transition: "all 0.4s ease"
     }
   },
     React.createElement("div", {
@@ -35,12 +35,13 @@ function SharedNav() {
         href: "#",
         onClick: function(e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); },
         style: {
-          fontFamily: FONT,
+          fontFamily: "'Noto Sans JP',system-ui,sans-serif",
           fontSize: isMobile ? 14 : 16,
           fontWeight: 900,
-          color: COLOR.text,
+          color: scrolled ? "#1d1d1f" : "#fff",
           textDecoration: "none",
-          letterSpacing: 1
+          letterSpacing: 2,
+          transition: "color 0.4s"
         }
       }, "\u98EF\u7530\u4E38\u5149\u90E8\u54C1"),
 
@@ -48,14 +49,15 @@ function SharedNav() {
       React.createElement("a", {
         href: "tel:0265-23-1231",
         style: {
-          fontFamily: FONT,
+          fontFamily: "'Noto Sans JP',system-ui,sans-serif",
           fontSize: isMobile ? 12 : 13,
           fontWeight: 700,
-          color: COLOR.accent,
+          color: scrolled ? "#1a4b8e" : "#c8a84e",
           textDecoration: "none",
           display: "flex",
           alignItems: "center",
-          gap: 6
+          gap: 6,
+          transition: "color 0.4s"
         }
       },
         React.createElement("span", { style: { fontSize: 15 } }, "\u260E"),

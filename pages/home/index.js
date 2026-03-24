@@ -1,8 +1,10 @@
-/* === IIDA MARUMITSU BUHIN -- HOME PAGE === */
+/* === IIDA MARUMITSU BUHIN -- HOME PAGE v2 === */
 
 function HomePage() {
   var w = useWinW();
   var isMobile = w < 768;
+  var DARK = "#0c1829";
+  var GOLD = "#c8a84e";
 
   /* ── Company data ── */
   var companyInfo = [
@@ -17,38 +19,85 @@ function HomePage() {
     { label: "\u30B0\u30EB\u30FC\u30D7", value: "\u682A\u5F0F\u4F1A\u793ASPREAD" }
   ];
 
-  /* ── Section: Hero ── */
+  /* ── AnimNum (inline) ── */
+  function AnimNum(props) {
+    var value = props.value;
+    var suffix = props.suffix || "";
+    var _s = useState(0), d = _s[0], setD = _s[1];
+    var _iv = useInView(0.3), ref = _iv[0], inView = _iv[1];
+    useEffect(function() {
+      if (!inView) return;
+      var s = Date.now();
+      var dur = 2000;
+      var rafId;
+      var tick = function() {
+        var p = Math.min((Date.now() - s) / dur, 1);
+        setD(Math.round((1 - Math.pow(1 - p, 3)) * value));
+        if (p < 1) rafId = requestAnimationFrame(tick);
+      };
+      rafId = requestAnimationFrame(tick);
+      return function() { cancelAnimationFrame(rafId); };
+    }, [inView, value]);
+    return React.createElement("span", { ref: ref }, d.toLocaleString(), suffix);
+  }
+
+  /* ── Section: Hero (Dark) ── */
   function HeroSection() {
     return React.createElement("section", {
       style: {
-        minHeight: isMobile ? "70vh" : "80vh",
+        minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
-        padding: isMobile ? "100px 24px 60px" : "140px 24px 80px",
-        background: "linear-gradient(170deg, #f5f7fa 0%, #ffffff 40%, #f0f4f8 100%)",
+        padding: isMobile ? "100px 24px 60px" : "120px 24px 80px",
+        background: "linear-gradient(160deg, " + DARK + " 0%, #162544 40%, #1a3a5c 70%, #0c1829 100%)",
         position: "relative",
         overflow: "hidden"
       }
     },
-      /* Subtle grid pattern */
+      /* Decorative orbs */
       React.createElement("div", {
         style: {
           position: "absolute",
-          inset: 0,
-          backgroundImage: "radial-gradient(circle, " + COLOR.border + " 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-          opacity: 0.4,
+          width: isMobile ? 300 : 500,
+          height: isMobile ? 300 : 500,
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(26,75,142,0.3) 0%, transparent 70%)",
+          top: "-10%",
+          right: "-10%",
+          pointerEvents: "none"
+        }
+      }),
+      React.createElement("div", {
+        style: {
+          position: "absolute",
+          width: isMobile ? 200 : 400,
+          height: isMobile ? 200 : 400,
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(200,168,78,0.15) 0%, transparent 70%)",
+          bottom: "5%",
+          left: "-5%",
           pointerEvents: "none"
         }
       }),
 
-      /* Accent line */
+      /* Grid lines */
+      React.createElement("div", {
+        style: {
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+          pointerEvents: "none"
+        }
+      }),
+
+      /* Gold line */
       React.createElement(Reveal, null,
         React.createElement("div", {
-          style: { width: 40, height: 4, background: COLOR.accent, borderRadius: 2, margin: "0 auto 24px" }
+          style: { width: 48, height: 3, background: "linear-gradient(90deg, transparent, " + GOLD + ", transparent)", margin: "0 auto 32px" }
         })
       ),
 
@@ -57,28 +106,35 @@ function HomePage() {
         React.createElement("h1", {
           style: {
             fontFamily: FONT,
-            fontSize: isMobile ? 28 : 48,
+            fontSize: isMobile ? 32 : 56,
             fontWeight: 900,
-            lineHeight: 1.2,
-            letterSpacing: isMobile ? 2 : 4,
-            marginBottom: 20,
-            color: COLOR.text
+            lineHeight: 1.15,
+            letterSpacing: isMobile ? 4 : 8,
+            marginBottom: 16,
+            color: "#fff"
           }
         }, "\u98EF\u7530\u4E38\u5149\u90E8\u54C1")
       ),
 
-      /* English name */
+      /* English */
       React.createElement(Reveal, { delay: 0.2 },
         React.createElement("p", {
           style: {
             fontFamily: FONT,
-            fontSize: isMobile ? 11 : 13,
-            color: COLOR.textMuted,
-            letterSpacing: 4,
-            marginBottom: 32,
+            fontSize: isMobile ? 10 : 12,
+            color: GOLD,
+            letterSpacing: 6,
+            marginBottom: 40,
             textTransform: "uppercase"
           }
-        }, "IIDA MARUMITSU BUHIN")
+        }, "IIDA MARUMITSU BUHIN Co., Ltd.")
+      ),
+
+      /* Divider */
+      React.createElement(Reveal, { delay: 0.25 },
+        React.createElement("div", {
+          style: { width: 1, height: 40, background: "rgba(255,255,255,0.15)", margin: "0 auto 40px" }
+        })
       ),
 
       /* Tagline */
@@ -86,25 +142,33 @@ function HomePage() {
         React.createElement("p", {
           style: {
             fontFamily: FONT,
-            fontSize: isMobile ? 15 : 20,
-            color: COLOR.textSub,
-            lineHeight: 1.8,
-            maxWidth: 520
+            fontSize: isMobile ? 15 : 18,
+            color: "rgba(255,255,255,0.7)",
+            lineHeight: 2,
+            maxWidth: 480,
+            letterSpacing: 1
           }
-        }, "\u662D\u548C53\u5E74\u5275\u696D\u3002\u9577\u91CE\u770C\u98EF\u7530\u5E02\u3067\n\u81EA\u52D5\u8ECA\u90E8\u54C1\u30FB\u5DE5\u5177\u306E\u5C02\u9580\u5378\u3092\u55B6\u3093\u3067\u3044\u307E\u3059\u3002")
+        }, "\u662D\u548C53\u5E74\u5275\u696D\u3002\u9577\u91CE\u770C\u98EF\u7530\u5E02\u3092\u62E0\u70B9\u306B",
+          React.createElement("br"),
+          "\u81EA\u52D5\u8ECA\u90E8\u54C1\u30FB\u5DE5\u5177\u306E\u5C02\u9580\u5378\u3092\u55B6\u3093\u3067\u3044\u307E\u3059\u3002"
+        )
       ),
 
       /* Scroll hint */
-      React.createElement(Reveal, { delay: 0.6 },
+      React.createElement(Reveal, { delay: 0.7 },
         React.createElement("div", {
           style: {
-            marginTop: 48,
+            position: "absolute",
+            bottom: 40,
+            left: "50%",
+            transform: "translateX(-50%)",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             gap: 8,
-            color: COLOR.textMuted,
-            fontSize: 12,
+            color: "rgba(255,255,255,0.3)",
+            fontSize: 10,
+            letterSpacing: 3,
             fontFamily: FONT
           }
         },
@@ -112,11 +176,67 @@ function HomePage() {
           React.createElement("div", {
             style: {
               width: 1,
-              height: 32,
-              background: "linear-gradient(180deg, " + COLOR.textMuted + ", transparent)"
+              height: 28,
+              background: "linear-gradient(180deg, rgba(255,255,255,0.3), transparent)"
             }
           })
         )
+      )
+    );
+  }
+
+  /* ── Section: Stats ── */
+  function StatsSection() {
+    var stats = [
+      { value: 47, unit: "\u5E74", label: "\u5275\u696D\u304B\u3089\u306E\u5B9F\u7E3E" },
+      { value: 2, unit: "\u62E0\u70B9", label: "\u55B6\u696D\u62E0\u70B9" },
+      { value: 1200, unit: "\u4E07\u5186", label: "\u8CC7\u672C\u91D1" }
+    ];
+
+    return React.createElement("section", {
+      style: {
+        padding: isMobile ? "56px 24px" : "72px 24px",
+        background: "#fff",
+        borderBottom: "1px solid " + COLOR.border
+      }
+    },
+      React.createElement("div", {
+        style: {
+          maxWidth: 720,
+          margin: "0 auto",
+          display: "flex",
+          justifyContent: "center",
+          gap: isMobile ? 24 : 80,
+          flexWrap: "wrap"
+        }
+      },
+        stats.map(function(s, i) {
+          return React.createElement(Reveal, { key: i, delay: i * 0.15 },
+            React.createElement("div", {
+              style: { textAlign: "center", minWidth: isMobile ? 100 : 140 }
+            },
+              React.createElement("div", {
+                style: {
+                  fontFamily: FONT,
+                  fontSize: isMobile ? 36 : 52,
+                  fontWeight: 900,
+                  color: COLOR.accent,
+                  letterSpacing: -1,
+                  lineHeight: 1
+                }
+              }, React.createElement(AnimNum, { value: s.value, suffix: s.unit })),
+              React.createElement("div", {
+                style: {
+                  fontFamily: FONT,
+                  fontSize: 12,
+                  color: COLOR.textMuted,
+                  marginTop: 8,
+                  letterSpacing: 1
+                }
+              }, s.label)
+            )
+          );
+        })
       )
     );
   }
@@ -125,17 +245,17 @@ function HomePage() {
   function AboutSection() {
     var features = [
       {
-        icon: "\uD83D\uDE97",
+        color: "#1a4b8e",
         title: "\u8C4A\u5BCC\u306A\u54C1\u63C3\u3048",
         desc: "\u56FD\u7523\u8ECA\u30FB\u8F38\u5165\u8ECA\u5411\u3051\u306E\u81EA\u52D5\u8ECA\u90E8\u54C1\u3001\u6574\u5099\u7528\u5DE5\u5177\u3001\u6D88\u8017\u54C1\u307E\u3067\u5E45\u5E83\u304F\u53D6\u308A\u63C3\u3048\u3066\u3044\u307E\u3059\u3002"
       },
       {
-        icon: "\u26A1",
+        color: "#c8a84e",
         title: "\u8FC5\u901F\u306A\u5BFE\u5FDC",
         desc: "\u5730\u5143\u306E\u6574\u5099\u5DE5\u5834\u3084\u30C7\u30A3\u30FC\u30E9\u30FC\u3078\u3001\u5FC5\u8981\u306A\u90E8\u54C1\u3092\u7D20\u65E9\u304F\u304A\u5C4A\u3051\u3057\u307E\u3059\u3002"
       },
       {
-        icon: "\uD83E\uDD1D",
+        color: "#2d6a4f",
         title: "\u78BA\u304B\u306A\u4FE1\u983C",
         desc: "\u5275\u696D\u304B\u308945\u5E74\u4EE5\u4E0A\u3001\u5730\u57DF\u306E\u81EA\u52D5\u8ECA\u6574\u5099\u696D\u754C\u3092\u652F\u3048\u7D9A\u3051\u3066\u3044\u307E\u3059\u3002"
       }
@@ -144,7 +264,7 @@ function HomePage() {
     return React.createElement("section", {
       style: {
         padding: isMobile ? "72px 24px" : "100px 24px",
-        background: COLOR.bg
+        background: COLOR.surfaceAlt
       }
     },
       React.createElement("div", { style: MAX_W },
@@ -160,30 +280,43 @@ function HomePage() {
           style: {
             display: "grid",
             gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr",
-            gap: 24,
-            maxWidth: 800,
+            gap: 20,
+            maxWidth: 820,
             margin: "0 auto"
           }
         },
           features.map(function(f, i) {
-            return React.createElement(Reveal, { key: i, delay: i * 0.1 },
+            return React.createElement(Reveal, { key: i, delay: i * 0.12 },
               React.createElement("div", {
                 style: {
-                  padding: 28,
-                  background: COLOR.surface,
-                  border: "1px solid " + COLOR.border,
+                  padding: "32px 24px",
+                  background: "#fff",
                   borderRadius: 16,
-                  textAlign: "center"
+                  borderTop: "3px solid " + f.color,
+                  boxShadow: "0 2px 20px rgba(0,0,0,0.04)"
                 }
               },
                 React.createElement("div", {
-                  style: { fontSize: 32, marginBottom: 16 }
-                }, f.icon),
+                  style: {
+                    width: 40,
+                    height: 40,
+                    borderRadius: 10,
+                    background: f.color + "12",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: 16
+                  }
+                },
+                  React.createElement("div", {
+                    style: { width: 12, height: 12, borderRadius: 3, background: f.color }
+                  })
+                ),
                 React.createElement("div", {
                   style: {
                     fontFamily: FONT,
-                    fontSize: 15,
-                    fontWeight: 700,
+                    fontSize: 16,
+                    fontWeight: 900,
                     color: COLOR.text,
                     marginBottom: 10
                   }
@@ -193,7 +326,7 @@ function HomePage() {
                     fontFamily: FONT,
                     fontSize: 13,
                     color: COLOR.textSub,
-                    lineHeight: 1.7
+                    lineHeight: 1.8
                   }
                 }, f.desc)
               )
@@ -209,7 +342,7 @@ function HomePage() {
     return React.createElement("section", {
       style: {
         padding: isMobile ? "72px 24px" : "100px 24px",
-        background: COLOR.surfaceAlt
+        background: "#fff"
       }
     },
       React.createElement("div", { style: MAX_W },
@@ -224,10 +357,10 @@ function HomePage() {
             style: {
               maxWidth: 680,
               margin: "0 auto",
-              border: "1px solid " + COLOR.border,
               borderRadius: 16,
               overflow: "hidden",
-              background: COLOR.white
+              boxShadow: "0 4px 32px rgba(0,0,0,0.06)",
+              border: "1px solid " + COLOR.border
             }
           },
             companyInfo.map(function(row, i) {
@@ -236,7 +369,8 @@ function HomePage() {
                 style: {
                   display: "flex",
                   flexDirection: isMobile ? "column" : "row",
-                  borderBottom: i < companyInfo.length - 1 ? "1px solid " + COLOR.border : "none"
+                  borderBottom: i < companyInfo.length - 1 ? "1px solid " + COLOR.border : "none",
+                  background: i % 2 === 0 ? "#fff" : COLOR.surfaceAlt
                 }
               },
                 React.createElement("div", {
@@ -244,10 +378,9 @@ function HomePage() {
                     fontFamily: FONT,
                     fontSize: 13,
                     fontWeight: 700,
-                    color: COLOR.textSub,
+                    color: COLOR.accent,
                     padding: isMobile ? "14px 20px 4px" : "14px 24px",
-                    minWidth: isMobile ? "auto" : 140,
-                    background: isMobile ? "transparent" : COLOR.surfaceAlt
+                    minWidth: isMobile ? "auto" : 140
                   }
                 }, row.label),
                 React.createElement("div", {
@@ -273,12 +406,14 @@ function HomePage() {
     var locations = [
       {
         name: "\u672C\u5E97",
+        sub: "\u98EF\u7530\u5E02\u5927\u4E45\u4FDD\u753A",
         address: "\u3012395-0053 \u9577\u91CE\u770C\u98EF\u7530\u5E02\u5927\u4E45\u4FDD\u753A2565-6",
         tel: "0265-23-1231",
         mapQuery: "%E9%95%B7%E9%87%8E%E7%9C%8C%E9%A3%AF%E7%94%B0%E5%B8%82%E5%A4%A7%E4%B9%85%E4%BF%9D%E7%94%BA2565-6"
       },
       {
         name: "\u751F\u7530\u5E97",
+        sub: "\u677E\u5DDD\u753A\u751F\u7530",
         address: "\u3012399-3302 \u9577\u91CE\u770C\u4E0B\u4F0A\u90A3\u90E1\u677E\u5DDD\u753A\u751F\u7530900-1",
         tel: null,
         mapQuery: "%E9%95%B7%E9%87%8E%E7%9C%8C%E4%B8%8B%E4%BC%8A%E9%82%A3%E9%83%A1%E6%9D%BE%E5%B7%9D%E7%94%BA%E7%94%9F%E7%94%B0900-1"
@@ -288,7 +423,7 @@ function HomePage() {
     return React.createElement("section", {
       style: {
         padding: isMobile ? "72px 24px" : "100px 24px",
-        background: COLOR.bg
+        background: COLOR.surfaceAlt
       }
     },
       React.createElement("div", { style: MAX_W },
@@ -306,7 +441,7 @@ function HomePage() {
             display: "grid",
             gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
             gap: 24,
-            maxWidth: 800,
+            maxWidth: 820,
             margin: "0 auto"
           }
         },
@@ -314,73 +449,62 @@ function HomePage() {
             return React.createElement(Reveal, { key: i, delay: i * 0.15 },
               React.createElement("div", {
                 style: {
-                  border: "1px solid " + COLOR.border,
                   borderRadius: 16,
                   overflow: "hidden",
-                  background: COLOR.white
+                  background: "#fff",
+                  boxShadow: "0 4px 32px rgba(0,0,0,0.06)",
+                  border: "1px solid " + COLOR.border
                 }
               },
                 /* Map */
-                loc.mapQuery
-                  ? React.createElement("div", {
-                      style: { aspectRatio: "16/10", background: COLOR.surfaceAlt }
-                    },
-                      React.createElement("iframe", {
-                        src: "https://www.google.com/maps?q=" + loc.mapQuery + "&output=embed",
-                        width: "100%",
-                        height: "100%",
-                        style: { border: 0 },
-                        allowFullScreen: true,
-                        loading: "lazy",
-                        referrerPolicy: "no-referrer-when-downgrade"
-                      })
-                    )
-                  : React.createElement("div", {
-                      style: {
-                        aspectRatio: "16/10",
-                        background: COLOR.surfaceAlt,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontFamily: FONT,
-                        fontSize: 14,
-                        color: COLOR.textMuted
-                      }
-                    }, "\u6E96\u5099\u4E2D"),
+                React.createElement("div", {
+                  style: { aspectRatio: "16/10", background: COLOR.surfaceAlt }
+                },
+                  React.createElement("iframe", {
+                    src: "https://www.google.com/maps?q=" + loc.mapQuery + "&output=embed",
+                    width: "100%",
+                    height: "100%",
+                    style: { border: 0 },
+                    allowFullScreen: true,
+                    loading: "lazy",
+                    referrerPolicy: "no-referrer-when-downgrade"
+                  })
+                ),
 
                 /* Info */
                 React.createElement("div", {
-                  style: { padding: 20 }
+                  style: { padding: "20px 24px" }
                 },
                   React.createElement("div", {
                     style: {
-                      fontFamily: FONT,
-                      fontSize: 16,
-                      fontWeight: 900,
-                      color: COLOR.text,
-                      marginBottom: 8,
                       display: "flex",
-                      alignItems: "center",
-                      gap: 8
+                      alignItems: "baseline",
+                      gap: 10,
+                      marginBottom: 10
                     }
                   },
                     React.createElement("span", {
                       style: {
-                        display: "inline-block",
-                        width: 8,
-                        height: 8,
-                        borderRadius: "50%",
-                        background: COLOR.accent
+                        fontFamily: FONT,
+                        fontSize: 18,
+                        fontWeight: 900,
+                        color: COLOR.text
                       }
-                    }),
-                    loc.name
+                    }, loc.name),
+                    React.createElement("span", {
+                      style: {
+                        fontFamily: FONT,
+                        fontSize: 12,
+                        color: COLOR.textMuted
+                      }
+                    }, loc.sub)
                   ),
                   React.createElement("div", {
                     style: {
                       fontFamily: FONT,
                       fontSize: 13,
                       color: COLOR.textSub,
-                      lineHeight: 1.7
+                      lineHeight: 1.8
                     }
                   },
                     loc.address,
@@ -400,8 +524,8 @@ function HomePage() {
   function OnlineSection() {
     return React.createElement("section", {
       style: {
-        padding: isMobile ? "56px 24px" : "80px 24px",
-        background: COLOR.surfaceAlt
+        padding: isMobile ? "56px 24px" : "72px 24px",
+        background: "#fff"
       }
     },
       React.createElement("div", { style: Object.assign({}, MAX_W, { textAlign: "center" }) },
@@ -418,46 +542,72 @@ function HomePage() {
               alignItems: "center",
               gap: 12,
               marginTop: 28,
-              padding: "16px 32px",
-              background: COLOR.white,
-              border: "1px solid " + COLOR.border,
-              borderRadius: 12,
+              padding: "16px 40px",
+              background: COLOR.accent,
+              borderRadius: 100,
               fontFamily: FONT,
               fontSize: 15,
               fontWeight: 700,
-              color: COLOR.accent
+              color: "#fff",
+              cursor: "pointer",
+              boxShadow: "0 4px 20px rgba(26,75,142,0.25)"
             }
           },
-            React.createElement("span", { style: { fontSize: 20 } }, "\uD83D\uDED2"),
-            "\u30E4\u30D5\u30AA\u30AF\u3067\u8CFC\u5165"
+            "\u30E4\u30D5\u30AA\u30AF\u3067\u898B\u308B \u2192"
           )
         )
       )
     );
   }
 
-  /* ── Section: Contact ── */
+  /* ── Section: Contact (Dark) ── */
   function ContactSection() {
     return React.createElement("section", {
       style: {
         padding: isMobile ? "72px 24px" : "100px 24px",
-        background: "linear-gradient(180deg, " + COLOR.bg + ", " + COLOR.surfaceAlt + ")",
-        textAlign: "center"
+        background: "linear-gradient(160deg, " + DARK + " 0%, #1a3a5c 100%)",
+        textAlign: "center",
+        position: "relative",
+        overflow: "hidden"
       }
     },
+      /* Decorative */
+      React.createElement("div", {
+        style: {
+          position: "absolute",
+          width: 300,
+          height: 300,
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(200,168,78,0.1) 0%, transparent 70%)",
+          top: "-10%",
+          left: "-5%",
+          pointerEvents: "none"
+        }
+      }),
       React.createElement("div", { style: MAX_W },
         React.createElement(Reveal, null,
-          React.createElement(SectionLabel, { color: COLOR.accent }, "CONTACT"),
-          React.createElement(SectionTitle, null, "\u304A\u554F\u3044\u5408\u308F\u305B")
+          React.createElement("p", {
+            style: { fontFamily: FONT, fontSize: 12, color: GOLD, letterSpacing: 3, marginBottom: 12, textTransform: "uppercase" }
+          }, "CONTACT"),
+          React.createElement("h2", {
+            style: {
+              fontFamily: FONT,
+              fontSize: "clamp(24px,4.5vw,40px)",
+              fontWeight: 900,
+              lineHeight: 1.3,
+              color: "#fff",
+              marginBottom: 16
+            }
+          }, "\u304A\u554F\u3044\u5408\u308F\u305B")
         ),
         React.createElement(Reveal, { delay: 0.15 },
           React.createElement("p", {
             style: {
               fontFamily: FONT,
               fontSize: isMobile ? 14 : 16,
-              color: COLOR.textSub,
+              color: "rgba(255,255,255,0.6)",
               lineHeight: 1.8,
-              margin: "20px auto 36px",
+              margin: "0 auto 36px",
               maxWidth: 480
             }
           }, "\u90E8\u54C1\u306E\u304A\u53D6\u308A\u5BC4\u305B\u3001\u5728\u5EAB\u78BA\u8A8D\u306A\u3069\u304A\u6C17\u8EFD\u306B\u304A\u96FB\u8A71\u304F\u3060\u3055\u3044\u3002")
@@ -468,11 +618,11 @@ function HomePage() {
             style: {
               display: "inline-block",
               fontFamily: FONT,
-              fontSize: isMobile ? 28 : 40,
+              fontSize: isMobile ? 32 : 48,
               fontWeight: 900,
-              color: COLOR.text,
+              color: "#fff",
               textDecoration: "none",
-              letterSpacing: 2
+              letterSpacing: 3
             }
           }, "0265-23-1231")
         ),
@@ -481,7 +631,7 @@ function HomePage() {
             style: {
               fontFamily: FONT,
               fontSize: 13,
-              color: COLOR.textMuted,
+              color: "rgba(255,255,255,0.4)",
               marginTop: 12
             }
           }, "\u53D7\u4ED8\u6642\u9593: \u5E73\u65E5 8:30\uFF5E17:30")
@@ -496,6 +646,7 @@ function HomePage() {
   },
     React.createElement(SharedNav),
     React.createElement(HeroSection),
+    React.createElement(StatsSection),
     React.createElement(AboutSection),
     React.createElement(CompanyInfoSection),
     React.createElement(LocationsSection),
