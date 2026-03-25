@@ -217,8 +217,8 @@ function SharedNav() {
 function SharedFooter() {
   var groups = [
     { name: "\u682A\u5F0F\u4F1A\u793ESPREAD", href: "https://spread-inc.co.jp/" },
-    { name: "\u30B9\u30D5\u30A3\u30A2\u30E9\u30A4\u30C8", href: "https://sphere-light.com/" },
-    { name: "\u30A4\u30FC\u30FB\u30A8\u30CC\u30FB\u30C9\u30A5", href: "https://e-n-do.com/" }
+    { name: "\u30A4\u30FC\u30FB\u30A8\u30CC\u30FB\u30C9\u30A5", href: "https://e-n-do.com/" },
+    { name: "\u9580\u7530\u5DE5\u696D", href: "https://kadota-works.co.jp/" }
   ];
 
   return React.createElement("footer", {
