@@ -2,7 +2,7 @@
 
 function SharedFooter() {
   var groups = [
-    { name: "\u682A\u5F0F\u4F1A\u793ESPREAD", href: "https://spread-inc.co.jp/" },
+    { name: "SPREAD", href: "https://spread-inc.co.jp/" },
     { name: "\u30A4\u30FC\u30FB\u30A8\u30CC\u30FB\u30C9\u30A5", href: "https://e-n-do.com/" },
     { name: "\u9580\u7530\u5546\u5E97", href: "https://kadota-works.co.jp/" }
   ];
