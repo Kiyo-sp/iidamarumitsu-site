@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://iidamarumitsu.jp/sitemap.xml
