@@ -401,6 +401,218 @@ function HomePage() {
     );
   }
 
+  /* ── Section: Coverage Map ── */
+  function CoverageSection() {
+    /* Positions of stores on the map (% from top-left of map area) */
+    /* 本店: 飯田市中心 — roughly center-south */
+    /* 生田店: 松川町 — roughly center-north */
+    var honten = { top: 62, left: 48 };
+    var ikuta = { top: 28, left: 52 };
+
+    function StorePin(props) {
+      return React.createElement("div", {
+        style: {
+          position: "absolute",
+          top: props.top + "%",
+          left: props.left + "%",
+          transform: "translate(-50%,-50%)",
+          zIndex: 10,
+          textAlign: "center"
+        }
+      },
+        /* Pulse ring */
+        React.createElement("div", {
+          style: {
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%,-50%)",
+            width: isMobile ? 100 : 160,
+            height: isMobile ? 100 : 160,
+            borderRadius: "50%",
+            background: "radial-gradient(circle, " + props.color + "25 0%, " + props.color + "08 50%, transparent 70%)",
+            border: "1px solid " + props.color + "30",
+            pointerEvents: "none"
+          }
+        }),
+        /* Outer coverage circle */
+        React.createElement("div", {
+          style: {
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%,-50%)",
+            width: isMobile ? 180 : 280,
+            height: isMobile ? 180 : 280,
+            borderRadius: "50%",
+            border: "1px dashed " + props.color + "40",
+            pointerEvents: "none"
+          }
+        }),
+        /* Dot */
+        React.createElement("div", {
+          style: {
+            width: 14,
+            height: 14,
+            borderRadius: "50%",
+            background: props.color,
+            border: "3px solid #fff",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
+            margin: "0 auto",
+            position: "relative",
+            zIndex: 5
+          }
+        }),
+        /* Label */
+        React.createElement("div", {
+          style: {
+            marginTop: 6,
+            fontFamily: FONT,
+            fontSize: isMobile ? 11 : 13,
+            fontWeight: 900,
+            color: "#fff",
+            textShadow: "0 1px 4px rgba(0,0,0,0.7)",
+            whiteSpace: "nowrap",
+            position: "relative",
+            zIndex: 5
+          }
+        }, props.label),
+        React.createElement("div", {
+          style: {
+            fontFamily: FONT,
+            fontSize: isMobile ? 9 : 10,
+            color: "rgba(255,255,255,0.7)",
+            textShadow: "0 1px 4px rgba(0,0,0,0.7)",
+            whiteSpace: "nowrap",
+            position: "relative",
+            zIndex: 5
+          }
+        }, props.sub)
+      );
+    }
+
+    return React.createElement("section", {
+      style: {
+        padding: isMobile ? "72px 0 0" : "100px 0 0",
+        background: "#fff"
+      }
+    },
+      React.createElement("div", { style: { maxWidth: 980, margin: "0 auto", padding: "0 24px" } },
+        React.createElement(Reveal, null,
+          React.createElement("div", { style: { textAlign: "center", marginBottom: 40 } },
+            React.createElement(SectionLabel, { color: COLOR.accent }, "COVERAGE"),
+            React.createElement(SectionTitle, {
+              sub: "\u672C\u5E97\u3068\u751F\u7530\u5E97\u3067\u98EF\u7530\u30A8\u30EA\u30A2\u5168\u4F53\u3092\u30AB\u30D0\u30FC\u30021\u65E5\u306B\u4F55\u5EA6\u3067\u3082\u914D\u9001\u3057\u307E\u3059\u3002"
+            }, "\u30C7\u30EA\u30D0\u30EA\u30FC\u30A8\u30EA\u30A2")
+          )
+        )
+      ),
+
+      /* Map container */
+      React.createElement(Reveal, { delay: 0.15 },
+        React.createElement("div", {
+          style: {
+            position: "relative",
+            maxWidth: 980,
+            margin: "0 auto",
+            aspectRatio: isMobile ? "4/3" : "21/9",
+            overflow: "hidden"
+          }
+        },
+          /* Google Map — centered between two stores */
+          React.createElement("iframe", {
+            src: "https://www.google.com/maps?q=%E9%95%B7%E9%87%8E%E7%9C%8C%E9%A3%AF%E7%94%B0%E5%B8%82&z=11&output=embed",
+            width: "100%",
+            height: "100%",
+            style: { border: 0, filter: "saturate(0.7) brightness(0.95)" },
+            allowFullScreen: true,
+            loading: "lazy",
+            referrerPolicy: "no-referrer-when-downgrade"
+          }),
+
+          /* Dark overlay for contrast */
+          React.createElement("div", {
+            style: {
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(180deg, rgba(12,24,41,0.15) 0%, rgba(12,24,41,0.3) 100%)",
+              pointerEvents: "none"
+            }
+          }),
+
+          /* Store pins */
+          React.createElement(StorePin, {
+            top: honten.top,
+            left: honten.left,
+            color: "#e74c3c",
+            label: "\u672C\u5E97",
+            sub: "\u98EF\u7530\u5E02\u5927\u4E45\u4FDD\u753A"
+          }),
+          React.createElement(StorePin, {
+            top: ikuta.top,
+            left: ikuta.left,
+            color: "#3498db",
+            label: "\u751F\u7530\u5E97",
+            sub: "\u677E\u5DDD\u753A\u751F\u7530"
+          }),
+
+          /* Connection line between stores */
+          React.createElement("div", {
+            style: {
+              position: "absolute",
+              top: ikuta.top + "%",
+              left: (honten.left + ikuta.left) / 2 + "%",
+              width: 2,
+              height: (honten.top - ikuta.top) + "%",
+              background: "linear-gradient(180deg, #3498db80, #e74c3c80)",
+              transform: "translateX(-50%)",
+              pointerEvents: "none",
+              zIndex: 4
+            }
+          }),
+
+          /* Bottom info bar */
+          React.createElement("div", {
+            style: {
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              background: "linear-gradient(180deg, transparent, rgba(12,24,41,0.85))",
+              padding: isMobile ? "32px 20px 16px" : "40px 32px 20px",
+              display: "flex",
+              justifyContent: "center",
+              gap: isMobile ? 24 : 48,
+              pointerEvents: "none",
+              zIndex: 10
+            }
+          },
+            React.createElement("div", {
+              style: { textAlign: "center" }
+            },
+              React.createElement("div", {
+                style: { fontFamily: FONT, fontSize: isMobile ? 20 : 28, fontWeight: 900, color: "#fff" }
+              }, "\u7D04\u2005\uFF11\uFF15\u2005km"),
+              React.createElement("div", {
+                style: { fontFamily: FONT, fontSize: isMobile ? 10 : 11, color: "rgba(255,255,255,0.6)", marginTop: 4 }
+              }, "2\u5E97\u8217\u9593\u306E\u8DDD\u96E2")
+            ),
+            React.createElement("div", {
+              style: { textAlign: "center" }
+            },
+              React.createElement("div", {
+                style: { fontFamily: FONT, fontSize: isMobile ? 20 : 28, fontWeight: 900, color: GOLD }
+              }, "1\u65E5\u8907\u6570\u56DE"),
+              React.createElement("div", {
+                style: { fontFamily: FONT, fontSize: isMobile ? 10 : 11, color: "rgba(255,255,255,0.6)", marginTop: 4 }
+              }, "\u30C7\u30EA\u30D0\u30EA\u30FC\u5BFE\u5FDC")
+            )
+          )
+        )
+      )
+    );
+  }
+
   /* ── Section: Company Info ── */
   function CompanyInfoSection() {
     return React.createElement("section", {
@@ -712,6 +924,7 @@ function HomePage() {
     React.createElement(HeroSection),
     React.createElement(StatsSection),
     React.createElement(AboutSection),
+    React.createElement(CoverageSection),
     React.createElement(CompanyInfoSection),
     React.createElement(LocationsSection),
     React.createElement(OnlineSection),
