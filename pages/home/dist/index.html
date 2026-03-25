@@ -80,7 +80,12 @@ function HomePage() {
     { label: "TEL", value: "0265-23-1231" },
     { label: "\u4E8B\u696D\u5185\u5BB9", value: "\u81EA\u52D5\u8ECA\u90E8\u54C1\u30FB\u5DE5\u5177\u5378\u58F2\u696D" },
     { label: "\u53D6\u5F15\u9280\u884C", value: "\u98EF\u7530\u4FE1\u7528\u91D1\u5EAB\u3001\u516B\u5341\u4E8C\u9280\u884C" },
-    { label: "\u30B0\u30EB\u30FC\u30D7", value: "\u682A\u5F0F\u4F1A\u793ESPREAD" }
+    { label: "\u682A\u4E3B", value: "\u682A\u5F0F\u4F1A\u793ESPREAD\uFF0870%\uFF09/ \u9580\u7530\u5546\u5E97\uFF0830%\uFF09" },
+    { label: "\u30B0\u30EB\u30FC\u30D7\u4F1A\u793E", value: null, links: [
+      { name: "\u682A\u5F0F\u4F1A\u793ESPREAD", href: "https://spread-inc.co.jp/" },
+      { name: "\u30B9\u30D5\u30A3\u30A2\u30E9\u30A4\u30C8\uFF08\u81EA\u52D5\u8ECA\u7528LED\uFF09", href: "https://sphere-light.com/" },
+      { name: "\u30A4\u30FC\u30FB\u30A8\u30CC\u30FB\u30C9\u30A5\uFF08\u9632\u9306\u30FB\u30B7\u30FC\u30E9\u30FC\uFF09", href: "https://e-n-do.com/" }
+    ] }
   ];
 
   /* ── AnimNum (inline) ── */
@@ -668,7 +673,20 @@ function HomePage() {
                     lineHeight: 1.7,
                     flex: 1
                   }
-                }, row.value)
+                },
+                  row.links
+                    ? row.links.map(function(lk, j) {
+                        return React.createElement("div", { key: j, style: { marginBottom: j < row.links.length - 1 ? 4 : 0 } },
+                          React.createElement("a", {
+                            href: lk.href,
+                            target: "_blank",
+                            rel: "noopener",
+                            style: { color: COLOR.accent, textDecoration: "none", fontSize: 13 }
+                          }, lk.name + " \u2197")
+                        );
+                      })
+                    : row.value
+                )
               );
             })
           )
