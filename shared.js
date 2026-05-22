@@ -216,8 +216,10 @@ function SharedNav() {
 
 function SharedFooter() {
   var groups = [
-    { name: "SPREAD", href: "https://spread-inc.co.jp/" },
-    { name: "\u30A4\u30FC\u30FB\u30A8\u30CC\u30FB\u30C9\u30A5", href: "https://e-n-do.com/" },
+    { name: "\u682A\u5F0F\u4F1A\u793ESPREAD", href: "https://www.spread-inc.co.jp/" },
+    { name: "SP-FAX", href: "https://fax.spread-inc.co.jp/" },
+    { name: "\u682A\u5F0F\u4F1A\u793E\u30A4\u30FC\u30A8\u30CC\u30C9\u30A5\u30B3\u30FC\u30DD\u30EC\u30FC\u30B7\u30E7\u30F3\uFF08ENDOX\uFF09", href: "https://e-n-do.com/" },
+    { name: "SPHERE LIGHT", href: "https://www.sphere-light.com/" },
     { name: "\u9580\u7530\u5546\u5E97", href: "https://kadota-works.co.jp/" }
   ];
 
@@ -250,7 +252,7 @@ function SharedFooter() {
       /* Group companies */
       React.createElement("p", {
         style: { fontFamily: FONT, fontSize: 11, color: COLOR.textMuted, letterSpacing: 2, marginBottom: 12 }
-      }, "GROUP"),
+      }, "\u30B0\u30EB\u30FC\u30D7\u30B5\u30FC\u30D3\u30B9"),
       React.createElement("div", {
         style: { display: "flex", justifyContent: "center", gap: 24, flexWrap: "wrap", marginBottom: 24 }
       },
