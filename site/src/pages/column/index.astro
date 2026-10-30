@@ -1,0 +1,24 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { COMPANY, isPublic } from "../../lib/site";
+const entries = (await getCollection("column", (e) => isPublic(e.data.status)))
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+const byMaker = Map.groupBy(entries, (e) => e.data.vehicle?.maker ?? "部品の基礎");
+---
+<BaseLayout title={`部品コラム｜${COMPANY.shortName}`} description="車種ごとに、飯田丸光部品が実際に出荷した部品の品番と交換の目安をまとめています。">
+  <h1>部品コラム</h1>
+  <p>車種・型式ごとに、当社が実際に出荷した部品の品番と、交換の目安をまとめています。</p>
+  {[...byMaker].map(([maker, list]) => (
+    <section>
+      <h2>{maker}</h2>
+      <ul class="list">
+        {list.map((e) => <li><a href={`/column/${e.id}/`}>{e.data.title}</a></li>)}
+      </ul>
+    </section>
+  ))}
+</BaseLayout>
+<style>
+  .list { padding-left: 1.2em; }
+  .list li { margin: 6px 0; }
+</style>

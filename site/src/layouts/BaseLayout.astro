@@ -1,0 +1,83 @@
+---
+import { COMPANY } from "../lib/site";
+interface Props { title: string; description: string; jsonLd?: object[]; noindex?: boolean; wide?: boolean; ogType?: string }
+const { title, description, jsonLd = [], noindex = false, wide = false, ogType = "article" } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex" />}
+  <meta property="og:type" content={ogType} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:site_name" content={COMPANY.name} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+  {jsonLd.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
+</head>
+<body>
+  <header class="site-header">
+    <div class="wide header-inner">
+      <a class="logo" href="/">飯田丸光部品</a>
+      <nav>
+        <a href="/#parts">取扱部品</a>
+        <a href="/column/">部品コラム</a>
+        <a href="/business/">法人のお客様</a>
+        <a href="/#stores">店舗</a>
+        <a href={COMPANY.telHref} class="nav-tel">☎ {COMPANY.tel}</a>
+      </nav>
+    </div>
+  </header>
+  <main class={wide ? "main-wide" : "wrap"}><slot /></main>
+  <footer class="site-footer">
+    <div class="wide">
+      <p class="f-name">{COMPANY.name}</p>
+      {COMPANY.stores.map((st) => <p>{st.name}：{st.address}</p>)}
+      <p>TEL <a href={COMPANY.telHref}>{COMPANY.tel}</a>（{COMPANY.hours}）</p>
+      <p class="f-copy">© {COMPANY.name}</p>
+    </div>
+  </footer>
+</body>
+</html>
+<style is:global>
+  :root { --dark: #0c1829; --gold: #c8a84e; --navy: #1a4b8e; --ink: #1d1d1f; --sub: #5f6368; --line: #e3e7ee; --bg-soft: #f5f8fc; --warn-bg: #fff7e6; --warn: #8a5300; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Noto Sans JP", system-ui, sans-serif; color: var(--ink); background: #fff; line-height: 1.8; -webkit-font-smoothing: antialiased; }
+  a { color: var(--navy); }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+  .wide { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  main.main-wide { padding: 0; }
+  .site-header { border-bottom: 1px solid var(--line); background: #fff; position: sticky; top: 0; z-index: 10; }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; flex-wrap: wrap; }
+  .logo { font-weight: 700; color: var(--ink); text-decoration: none; }
+  nav { display: flex; gap: 16px; font-size: 14px; flex-wrap: wrap; }
+  nav a { text-decoration: none; color: var(--ink); }
+  .nav-tel { color: var(--navy) !important; font-weight: 700; }
+  main { padding: 24px 16px 56px; }
+  h1 { font-size: 24px; line-height: 1.5; margin: 8px 0 16px; }
+  h2 { font-size: 19px; margin: 40px 0 12px; padding-left: 10px; border-left: 4px solid var(--navy); line-height: 1.5; }
+  h3 { font-size: 16px; margin: 28px 0 8px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; margin: 8px 0 4px; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--bg-soft); font-weight: 500; }
+  .table-scroll { overflow-x: auto; }
+  .note { font-size: 13px; color: var(--sub); margin: 4px 0 0; }
+  .site-footer { border-top: 1px solid var(--line); background: var(--bg-soft); font-size: 13px; color: var(--sub); padding: 24px 0; }
+  .site-footer p { margin: 2px 0; }
+  .f-name { font-weight: 700; color: var(--ink); }
+  .f-copy { margin-top: 12px !important; }
+  @media (max-width: 600px) {
+    h1 { font-size: 21px; }
+    .header-inner { flex-wrap: nowrap; min-height: 48px; }
+    .logo { flex: none; font-size: 15px; }
+    nav { flex-wrap: nowrap; overflow-x: auto; gap: 14px; font-size: 13px; white-space: nowrap; scrollbar-width: none; }
+  }
+</style>

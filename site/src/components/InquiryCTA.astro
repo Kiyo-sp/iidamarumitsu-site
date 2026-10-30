@@ -1,0 +1,24 @@
+---
+// 照会の出口。安全部品は「車台番号で確認してから」を強く出す。
+import { COMPANY } from "../lib/site";
+const { safety = false, audience = "both" } = Astro.props;
+---
+<aside class="cta">
+  {safety && <p class="warn">ブレーキ・足回りなどの安全に関わる部品です。品番は必ず車検証の車台番号でご確認ください。</p>}
+  <p class="cta-title">車検証の「車台番号」を伝えていただければ、品番をお調べします</p>
+  <p class="cta-body">国産全メーカーの純正部品と主要な優良部品を取り扱っています。飯田エリアは本店と生田店の2拠点から、1日に複数回配送しています。</p>
+  <div class="cta-actions">
+    <a class="btn" href={COMPANY.telHref}>電話で問い合わせる {COMPANY.tel}</a>
+    {audience !== "business" && <a class="btn btn-sub" href={COMPANY.mercari} rel="noopener" target="_blank">メルカリShopsを見る</a>}
+  </div>
+  <p class="note">受付：{COMPANY.hours}</p>
+</aside>
+<style>
+  .cta { margin: 40px 0 8px; padding: 20px; border: 2px solid var(--navy); border-radius: 8px; background: #fff; }
+  .warn { margin: 0 0 12px; padding: 10px 12px; background: var(--warn-bg); color: var(--warn); border-radius: 6px; font-size: 14px; font-weight: 500; }
+  .cta-title { font-weight: 700; margin: 0 0 6px; }
+  .cta-body { margin: 0 0 14px; font-size: 14px; }
+  .cta-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn { display: inline-block; padding: 10px 16px; border-radius: 6px; background: var(--navy); color: #fff; text-decoration: none; font-weight: 700; font-size: 15px; }
+  .btn-sub { background: #fff; color: var(--navy); border: 1px solid var(--navy); }
+</style>

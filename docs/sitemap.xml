@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://iidamarumitsu.jp/</loc>
-    <lastmod>2026-03-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://iidamarumitsu.jp/</loc></url>
+  <url><loc>https://iidamarumitsu.jp/column/</loc></url>
+  <url><loc>https://iidamarumitsu.jp/business/</loc></url>
+  <url><loc>https://iidamarumitsu.jp/column/daihatsu-tanto-la600s-front-brake-pad/</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://iidamarumitsu.jp/column/subaru-sambar-tt2-ribbed-belt/</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://iidamarumitsu.jp/column/toyota-hiace-kdh206v-oil-filter/</loc><lastmod>2026-10-30</lastmod></url>
 </urlset>

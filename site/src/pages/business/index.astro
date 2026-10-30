@@ -1,0 +1,34 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import InquiryCTA from "../../components/InquiryCTA.astro";
+import { COMPANY, GENUINE_MAKERS, AFTERMARKET_MAKERS } from "../../lib/site";
+---
+<BaseLayout title={`法人のお客様へ｜${COMPANY.shortName}`} description="飯田・下伊那エリアの整備工場・板金工場・ディーラー・中古車販売店・タクシー会社・官公庁へ、国産全メーカーの純正部品と優良部品を1日複数回お届けします。">
+  <p class="crumb"><a href="/">トップ</a> › 法人のお客様へ</p>
+  <h1>法人のお客様へ</h1>
+  <p>飯田丸光部品は、昭和53年から飯田・下伊那エリアの整備の現場に部品をお届けしてきた部品商です。本店（飯田市大久保町）と生田店（松川町生田）の2拠点から、1日に何度でも配送します。</p>
+
+  <h2>お取引のある業種</h2>
+  <p>整備工場、板金・塗装工場、カーディーラー、中古車販売店、タクシー・運送会社、官公庁の車両管理部門など。</p>
+
+  <h2>取扱部品</h2>
+  <h3>純正部品</h3>
+  <p>{GENUINE_MAKERS.join("・")}</p>
+  <h3>優良部品（主な取扱いメーカー）</h3>
+  <p>{AFTERMARKET_MAKERS.join("・")} ほか</p>
+  <p>ブレーキ・足回り・フィルター・ベルト・ワイパーなどの消耗品から、エンジン周りの部品まで。在庫にないものもお取り寄せします。</p>
+
+  <h2>ご注文の流れ</h2>
+  <ol>
+    <li>お電話で、車台番号と必要な部品をお伝えください。</li>
+    <li>品番と在庫・納期を確認してご連絡します。</li>
+    <li>本店・生田店から、現場へお届けします。</li>
+  </ol>
+  <p>新しくお取引を始めたい場合も、まずはお電話でご相談ください。</p>
+
+  <InquiryCTA audience="business" />
+</BaseLayout>
+<style>
+  .crumb { font-size: 13px; color: var(--sub); margin: 0; }
+  .crumb a { color: var(--sub); }
+</style>

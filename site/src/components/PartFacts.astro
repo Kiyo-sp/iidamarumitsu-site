@@ -1,0 +1,35 @@
+---
+// 出荷実績の表。値は frontmatter facts（集計スクリプトの出力）だけから出す。
+import { ym } from "../lib/site";
+const { facts, partLabel = facts.partName } = Astro.props;
+const span = (ys: number[]) => (ys.length === 0 ? "年式不明" : ys[0] === ys.at(-1) ? `${ys[0]}年式` : `${ys[0]}〜${ys.at(-1)}年式`);
+---
+<section class="facts">
+  <h2>{facts.vehicleName}（{facts.model}）で出荷実績のある品番</h2>
+  <p class="lead">{ym(facts.period[0])}〜{ym(facts.period[1])}に、当社から{facts.vehicleName} {facts.model} 向けに{partLabel}を{facts.shipments}件出荷しました。</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>品番</th><th>部品メーカー</th><th>出荷件数</th><th>出荷した車両の年式</th></tr></thead>
+      <tbody>
+        {facts.partNumbers.map((p) => (
+          <tr><td><strong>{p.number}</strong></td><td>{p.maker}</td><td>{p.count}件</td><td>{span(p.years)}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="note">出典：{facts.source}（{ym(facts.period[0])}〜{ym(facts.period[1])}）。同じ型式でも年式・グレード・装備で品番が変わるため、この表は適合の保証ではありません。</p>
+  {facts.coParts.length > 0 && (
+    <>
+      <h3>同じ車に同じ日に出荷されることが多かった部品</h3>
+      <ul class="co">
+        {facts.coParts.map((c) => <li>{c.name}<span>{c.count}回</span></li>)}
+      </ul>
+    </>
+  )}
+</section>
+<style>
+  .lead { margin: 0 0 8px; }
+  .co { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .co li { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: 14px; }
+  .co span { color: var(--sub); margin-left: 6px; font-size: 12px; }
+</style>

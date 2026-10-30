@@ -1,0 +1,48 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PartFacts from "../../components/PartFacts.astro";
+import InquiryCTA from "../../components/InquiryCTA.astro";
+import { COMPANY, isPublic } from "../../lib/site";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("column", (e) => isPublic(e.data.status));
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const url = new URL(`/column/${entry.id}/`, Astro.site).href;
+const jsonLd = [
+  {
+    "@context": "https://schema.org", "@type": "Article", headline: d.title, description: d.description,
+    datePublished: d.publishedAt.toISOString().slice(0, 10),
+    dateModified: (d.updatedAt ?? d.publishedAt).toISOString().slice(0, 10),
+    author: { "@type": "Organization", name: COMPANY.name, url: COMPANY.url },
+    publisher: { "@type": "Organization", name: COMPANY.name, url: COMPANY.url },
+    mainEntityOfPage: url,
+  },
+  {
+    "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+      { "@type": "ListItem", position: 1, name: "トップ", item: COMPANY.url + "/" },
+      { "@type": "ListItem", position: 2, name: "部品コラム", item: COMPANY.url + "/column/" },
+      { "@type": "ListItem", position: 3, name: d.title, item: url },
+    ],
+  },
+];
+---
+<BaseLayout title={`${d.title}｜${COMPANY.shortName}`} description={d.description} jsonLd={jsonLd} noindex={d.status !== "approved"}>
+  <p class="crumb"><a href="/">トップ</a> › <a href="/column/">部品コラム</a></p>
+  {d.status !== "approved" && <p class="draft">下書き（未承認）のプレビューです</p>}
+  <h1>{d.title}</h1>
+  <p class="meta">{d.vehicle && `${d.vehicle.maker} ${d.vehicle.name} ${d.vehicle.model}`} ／ 更新 {(d.updatedAt ?? d.publishedAt).toISOString().slice(0, 10)}</p>
+  {d.facts && <PartFacts facts={d.facts} partLabel={d.part?.name} />}
+  <article class="body"><Content /></article>
+  <InquiryCTA safety={d.part?.safety} audience={d.audience} />
+</BaseLayout>
+<style>
+  .crumb { font-size: 13px; color: var(--sub); margin: 0; }
+  .crumb a { color: var(--sub); }
+  .meta { font-size: 13px; color: var(--sub); margin: -8px 0 8px; }
+  .draft { background: #fdecea; color: #a50e0e; padding: 6px 10px; border-radius: 4px; font-size: 13px; display: inline-block; }
+</style>
