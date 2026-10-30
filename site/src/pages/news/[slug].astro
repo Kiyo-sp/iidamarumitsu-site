@@ -1,0 +1,22 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { COMPANY, isPublic } from "../../lib/site";
+export async function getStaticPaths() {
+  const items = await getCollection("news", (e) => isPublic(e.data.status));
+  return items.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<BaseLayout title={`${entry.data.title}｜${COMPANY.shortName}`} description={entry.data.title} noindex={entry.data.status !== "approved"}>
+  <p class="crumb"><a href="/">トップ</a> › <a href="/news/">お知らせ</a></p>
+  <h1>{entry.data.title}</h1>
+  <p class="date">{entry.data.date.toISOString().slice(0, 10)}</p>
+  <article><Content /></article>
+</BaseLayout>
+<style>
+  .crumb { font-size: 13px; color: var(--sub); margin: 0; }
+  .crumb a { color: var(--sub); }
+  .date { color: var(--sub); font-size: 14px; margin-top: -8px; }
+</style>

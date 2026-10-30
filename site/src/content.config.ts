@@ -12,7 +12,7 @@ const partNumber = z.object({
 
 const column = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/column" }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     description: z.string(),
     kind: z.enum(["vehicle-part", "part-guide", "business"]),
@@ -22,6 +22,7 @@ const column = defineCollection({
     updatedAt: z.coerce.date().optional(),
     vehicle: z.object({ maker: z.string(), name: z.string(), model: z.string() }).optional(),
     part: z.object({ name: z.string(), safety: z.boolean() }).optional(),
+    photos: z.array(z.object({ src: image(), alt: z.string() })).optional(),
     facts: z.object({
       vehicleName: z.string(), model: z.string(), itemCode: z.string(), partName: z.string(),
       shipments: z.number(), period: z.tuple([z.string(), z.string()]),
@@ -33,4 +34,14 @@ const column = defineCollection({
   }),
 });
 
-export const collections = { column };
+// お知らせ（休業日・新しい取扱いなど）。担当者が自由に書く
+const news = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/news" }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    status: z.enum(["draft", "approved"]),
+  }),
+});
+
+export const collections = { column, news };

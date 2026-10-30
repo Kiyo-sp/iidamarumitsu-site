@@ -3,3 +3,8 @@ site/dist/
 site/.astro/
 data/private/
 .DS_Store
+# 販売明細などのデータは Git に入れない（このリポジトリは公開）
+*.xls
+*.xlsx
+*.csv
+*.tsv

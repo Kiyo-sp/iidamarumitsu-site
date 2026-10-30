@@ -8,6 +8,10 @@ const columns = (await getCollection("column", (e) => isPublic(e.data.status)))
   .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
   .slice(0, 6);
 
+const news = (await getCollection("news", (e) => isPublic(e.data.status)))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
 const companyInfo: [string, string][] = [
   ["会社名", COMPANY.name],
   ["代表者", "水川慎也"],
@@ -59,6 +63,17 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
       </ul>
     </div>
   </section>
+
+  {news.length > 0 && (
+    <section class="news-bar">
+      <div class="wide">
+        <ul>
+          {news.map((e) => <li><time>{e.data.date.toISOString().slice(0, 10)}</time><a href={`/news/${e.id}/`}>{e.data.title}</a></li>)}
+        </ul>
+        <a class="news-more" href="/news/">お知らせ一覧 →</a>
+      </div>
+    </section>
+  )}
 
   <section class="sec" id="parts">
     <div class="wide">
@@ -183,6 +198,11 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
   .btn-ghost { border: 1px solid rgba(255,255,255,.6); color: #fff; }
   .btn-navy { background: var(--navy); color: #fff; white-space: nowrap; }
 
+  .news-bar { border-bottom: 1px solid var(--line); padding: 16px 0; font-size: 14px; }
+  .news-bar ul { list-style: none; padding: 0; margin: 0 0 6px; }
+  .news-bar li { display: flex; gap: 14px; padding: 4px 0; flex-wrap: wrap; }
+  .news-bar time { color: var(--sub); }
+  .news-more { font-size: 13px; }
   .sec { padding: 64px 0; }
   .sec-soft { background: var(--bg-soft); }
   .sec-kicker { color: var(--gold); font-size: 12px; letter-spacing: .2em; font-weight: 700; margin: 0; }

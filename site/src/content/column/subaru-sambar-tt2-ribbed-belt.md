@@ -1,13 +1,111 @@
 ---
-title: "サンバートラック TT2 のファンベルト（リブベルト）｜出荷実績のある品番と交換のサイン"
-description: "スバル サンバートラック TT2 の補機ベルトについて、飯田丸光部品が実際に出荷した品番（バンドー 4PK825 など）と年式、交換のサイン、注文時に伝えてほしいことをまとめました。"
-kind: "vehicle-part"
-audience: "both"
-status: "approved"
-publishedAt: "2026-10-30"
-vehicle: {"maker": "スバル", "name": "サンバートラック", "model": "TT2"}
-part: {"name": "ファンベルト（リブベルト）", "safety": false}
-facts: {"vehicleName": "サンバー", "model": "TT2", "itemCode": "5143", "partName": "リブエースベルト", "shipments": 36, "period": ["2022-09", "2025-12"], "years": [{"year": 2001, "count": 6}, {"year": 2003, "count": 2}, {"year": 2004, "count": 4}, {"year": 2005, "count": 3}, {"year": 2006, "count": 3}, {"year": 2007, "count": 5}, {"year": 2008, "count": 4}, {"year": 2009, "count": 2}, {"year": 2010, "count": 2}, {"year": 2011, "count": 3}, {"year": 2012, "count": 1}], "partNumbers": [{"number": "4PK825", "maker": "バンドー化学", "count": 24, "years": [2001, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012]}, {"number": "4PK650", "maker": "バンドー化学", "count": 4, "years": [2001, 2005, 2007]}, {"number": "4PK915", "maker": "バンドー化学", "count": 4, "years": [2001, 2007, 2008, 2011]}, {"number": "4PK725", "maker": "バンドー化学", "count": 3, "years": [2001, 2007, 2008]}, {"number": "4PK740", "maker": "バンドー化学", "count": 1, "years": [2011]}], "coParts": [{"name": "オイルシール", "count": 11}, {"name": "タイミングテンシヨナーベアリング", "count": 10}, {"name": "エアーエレメント", "count": 9}, {"name": "ウォーターポンプ", "count": 6}, {"name": "F/ディスクパッド", "count": 6}, {"name": "タペットカバーパッキンキット", "count": 6}, {"name": "タイロッドエンドカバー", "count": 4}, {"name": "グラファイトワイパーラバー", "count": 2}], "source": "飯田丸光部品の販売実績"}
+title: サンバートラック TT2 のファンベルト（リブベルト）｜出荷実績のある品番と交換のサイン
+description: スバル サンバートラック TT2 の補機ベルトについて、飯田丸光部品が実際に出荷した品番（バンドー 4PK825 など）と年式、交換のサイン、注文時に伝えてほしいことをまとめました。
+kind: vehicle-part
+audience: both
+status: approved
+publishedAt: 2026-10-30
+vehicle:
+  maker: スバル
+  name: サンバートラック
+  model: TT2
+part:
+  name: ファンベルト（リブベルト）
+  safety: false
+facts:
+  vehicleName: サンバー
+  model: TT2
+  itemCode: "5143"
+  partName: リブエースベルト
+  shipments: 36
+  period:
+    - 2022-09
+    - 2025-12
+  years:
+    - year: 2001
+      count: 6
+    - year: 2003
+      count: 2
+    - year: 2004
+      count: 4
+    - year: 2005
+      count: 3
+    - year: 2006
+      count: 3
+    - year: 2007
+      count: 5
+    - year: 2008
+      count: 4
+    - year: 2009
+      count: 2
+    - year: 2010
+      count: 2
+    - year: 2011
+      count: 3
+    - year: 2012
+      count: 1
+  partNumbers:
+    - number: 4PK825
+      maker: バンドー化学
+      count: 24
+      years:
+        - 2001
+        - 2003
+        - 2004
+        - 2005
+        - 2006
+        - 2007
+        - 2008
+        - 2009
+        - 2010
+        - 2011
+        - 2012
+    - number: 4PK650
+      maker: バンドー化学
+      count: 4
+      years:
+        - 2001
+        - 2005
+        - 2007
+    - number: 4PK915
+      maker: バンドー化学
+      count: 4
+      years:
+        - 2001
+        - 2007
+        - 2008
+        - 2011
+    - number: 4PK725
+      maker: バンドー化学
+      count: 3
+      years:
+        - 2001
+        - 2007
+        - 2008
+    - number: 4PK740
+      maker: バンドー化学
+      count: 1
+      years:
+        - 2011
+  coParts:
+    - name: オイルシール
+      count: 11
+    - name: タイミングテンシヨナーベアリング
+      count: 10
+    - name: エアーエレメント
+      count: 9
+    - name: F/ディスクパッド
+      count: 6
+    - name: ウォーターポンプ
+      count: 6
+    - name: タペットカバーパッキンキット
+      count: 6
+    - name: タイロッドエンドカバー
+      count: 4
+    - name: グラファイトワイパーラバー
+      count: 2
+  source: 飯田丸光部品の販売実績
+updatedAt: 2026-10-30
 ---
 ## 品番が複数あるのはなぜか
 

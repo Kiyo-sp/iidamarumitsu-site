@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { COMPANY, isPublic } from "../../lib/site";
+const items = (await getCollection("news", (e) => isPublic(e.data.status))).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+<BaseLayout title={`お知らせ｜${COMPANY.shortName}`} description="飯田丸光部品からのお知らせ（休業日・取扱いのご案内など）です。">
+  <p class="crumb"><a href="/">トップ</a> › お知らせ</p>
+  <h1>お知らせ</h1>
+  {items.length === 0 ? <p>現在お知らせはありません。</p> : (
+    <ul class="news">
+      {items.map((e) => <li><time>{e.data.date.toISOString().slice(0, 10)}</time><a href={`/news/${e.id}/`}>{e.data.title}</a></li>)}
+    </ul>
+  )}
+</BaseLayout>
+<style>
+  .crumb { font-size: 13px; color: var(--sub); margin: 0; }
+  .crumb a { color: var(--sub); }
+  .news { list-style: none; padding: 0; }
+  .news li { display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .news time { color: var(--sub); font-size: 14px; }
+</style>
