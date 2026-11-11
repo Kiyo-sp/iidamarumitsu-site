@@ -47,7 +47,7 @@ const jsonLd = [
       ))}
     </div>
   )}
-  {d.facts && <PartFacts facts={d.facts} partLabel={d.part?.name} />}
+  {d.facts && <PartFacts facts={d.facts} partLabel={d.part?.name} excludedPartNumbers={d.excludedPartNumbers} />}
   <article class="body"><Content /></article>
   <InquiryCTA safety={d.part?.safety} audience={d.audience} />
 </BaseLayout>

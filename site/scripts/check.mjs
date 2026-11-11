@@ -54,6 +54,26 @@ for (const file of listMarkdown(COLUMN_DIR)) {
       if (!latest) err(file, "実績（facts）が集計データにありません。手で書き換えていないか確認してください。");
       else if (JSON.stringify(latest) !== JSON.stringify(f)) err(file, "実績（facts）が集計データと違います。手で書き換えず、npm run refresh-facts で更新してください。");
     }
+    const excluded = data.excludedPartNumbers ?? [];
+    const excludedNumbers = new Set();
+    const visibleText = [
+      data.title, data.description, data.part?.name,
+      data.vehicle?.maker, data.vehicle?.name, data.vehicle?.model,
+      ...(data.photos ?? []).map((photo) => photo.alt),
+    ].filter(Boolean).join(" ");
+    for (const item of excluded) {
+      if (!item || typeof item.number !== "string" || !item.number.trim()) {
+        err(file, "excludedPartNumbers に除外する品番がありません。");
+        continue;
+      }
+      if (excludedNumbers.has(item.number)) err(file, `除外品番「${item.number}」が重複しています。`);
+      excludedNumbers.add(item.number);
+      if (!f.partNumbers.some((p) => p.number === item.number)) err(file, `除外品番「${item.number}」が facts にありません。`);
+      if (typeof item.reason !== "string" || !item.reason.trim()) err(file, `除外品番「${item.number}」の理由を記録してください。`);
+      if (body.includes(item.number)) err(file, `本文に掲載除外した品番「${item.number}」が残っています。`);
+      if (visibleText.includes(item.number)) err(file, `掲載除外した品番「${item.number}」がタイトル、説明、写真説明などに残っています。`);
+    }
+    if (excludedNumbers.size >= f.partNumbers.length) err(file, "すべての品番が掲載除外されています。集計内容を確認してください。");
     // 本文に出てくる品番は、実績にあるものだけ（AI が品番を作らないように）
     const known = new Set(f.partNumbers.map((p) => p.number));
     for (const m of body.matchAll(/\b(?:[A-Z]{1,4}\d{3,5}[A-Z]?|\d[A-Z]{2}\d{3}[A-Z]?)\b/g)) {

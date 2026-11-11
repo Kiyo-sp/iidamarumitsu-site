@@ -1,24 +1,30 @@
 ---
 // 出荷実績の表。値は frontmatter facts（集計スクリプトの出力）だけから出す。
 import { ym } from "../lib/site";
-const { facts, partLabel = facts.partName } = Astro.props;
+const { facts, partLabel = facts.partName, excludedPartNumbers = [] } = Astro.props;
+const excludedNumbers = new Set(excludedPartNumbers.map((item) => item.number));
+const displayedPartNumbers = facts.partNumbers.filter((item) => !excludedNumbers.has(item.number));
+const hasExclusions = excludedNumbers.size > 0;
 const span = (ys: number[]) => (ys.length === 0 ? "年式不明" : ys[0] === ys.at(-1) ? `${ys[0]}年式` : `${ys[0]}〜${ys.at(-1)}年式`);
 ---
 <section class="facts">
-  <h2>{facts.vehicleName}（{facts.model}）で出荷実績のある品番</h2>
-  <p class="lead">{ym(facts.period[0])}〜{ym(facts.period[1])}に、当社から{facts.vehicleName} {facts.model} 向けに{partLabel}を{facts.shipments}件出荷しました。</p>
+  <h2>{hasExclusions ? `${facts.vehicleName}（${facts.model}）の販売明細集計` : `${facts.vehicleName}（${facts.model}）で出荷実績のある品番`}</h2>
+  <p class="lead">{hasExclusions
+    ? `${ym(facts.period[0])}〜${ym(facts.period[1])}の販売明細で、${facts.vehicleName} ${facts.model} とともに記載されていた${partLabel}は${facts.shipments}件です。この件数は車両への適合を確認した出荷件数を示すものではありません。`
+    : `${ym(facts.period[0])}〜${ym(facts.period[1])}に、当社から${facts.vehicleName} ${facts.model} 向けに${partLabel}を${facts.shipments}件出荷しました。`}</p>
+  {hasExclusions && <p class="note">適合を確認できていない品番は、下の表に掲載していません。</p>}
   <div class="table-scroll">
     <table>
-      <thead><tr><th>品番</th><th>部品メーカー</th><th>出荷件数</th><th>出荷した車両の年式</th></tr></thead>
+      <thead><tr><th>品番</th><th>部品メーカー</th><th>{hasExclusions ? "集計件数" : "出荷件数"}</th><th>{hasExclusions ? "販売明細に記載された年式" : "出荷した車両の年式"}</th></tr></thead>
       <tbody>
-        {facts.partNumbers.map((p) => (
+        {displayedPartNumbers.map((p) => (
           <tr><td><strong>{p.number}</strong></td><td>{p.maker}</td><td>{p.count}件</td><td>{span(p.years)}</td></tr>
         ))}
       </tbody>
     </table>
   </div>
   <p class="note">出典：{facts.source}（{ym(facts.period[0])}〜{ym(facts.period[1])}）。同じ型式でも年式・グレード・装備で品番が変わるため、この表は適合の保証ではありません。</p>
-  {facts.coParts.length > 0 && (
+  {!hasExclusions && facts.coParts.length > 0 && (
     <>
       <h3>同じ車に同じ日に出荷されることが多かった部品</h3>
       <ul class="co">

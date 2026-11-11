@@ -107,7 +107,9 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
           <a class="col-card" href={`/column/${e.id}/`}>
             <span class="col-car">{e.data.vehicle ? `${e.data.vehicle.maker} ${e.data.vehicle.name} ${e.data.vehicle.model}` : "部品の基礎"}</span>
             <span class="col-part">{e.data.part?.name}</span>
-            {e.data.facts && <span class="col-meta">出荷実績 {e.data.facts.shipments}件 ／ 品番 {e.data.facts.partNumbers.length}種</span>}
+            {e.data.facts && <span class="col-meta">{e.data.excludedPartNumbers?.length
+              ? `販売明細集計 ${e.data.facts.shipments}件 ／ 掲載品番 ${e.data.facts.partNumbers.length - e.data.excludedPartNumbers.length}種`
+              : `出荷実績 ${e.data.facts.shipments}件 ／ 品番 ${e.data.facts.partNumbers.length}種`}</span>}
           </a>
         ))}
       </div>

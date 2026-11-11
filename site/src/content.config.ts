@@ -23,6 +23,8 @@ const column = defineCollection({
     vehicle: z.object({ maker: z.string(), name: z.string(), model: z.string() }).optional(),
     part: z.object({ name: z.string(), safety: z.boolean() }).optional(),
     photos: z.array(z.object({ src: image(), alt: z.string() })).optional(),
+    // facts は販売データの原集計を保つ。適合確認できない品番の掲載除外は別欄で記録する。
+    excludedPartNumbers: z.array(z.object({ number: z.string(), reason: z.string() })).optional(),
     facts: z.object({
       vehicleName: z.string(), model: z.string(), itemCode: z.string(), partName: z.string(),
       shipments: z.number(), period: z.tuple([z.string(), z.string()]),
@@ -31,6 +33,33 @@ const column = defineCollection({
       coParts: z.array(z.object({ name: z.string(), count: z.number() })),
       source: z.string(),
     }).optional(),
+  }).superRefine((data, ctx) => {
+    const excluded = data.excludedPartNumbers ?? [];
+    const numbers = new Set<string>();
+    const partNumbers = data.facts?.partNumbers ?? [];
+    const visibleText = [
+      data.title, data.description, data.part?.name,
+      data.vehicle?.maker, data.vehicle?.name, data.vehicle?.model,
+      ...(data.photos ?? []).map((photo) => photo.alt),
+    ].filter(Boolean).join(" ");
+    for (const [index, item] of excluded.entries()) {
+      if (numbers.has(item.number)) {
+        ctx.addIssue({ code: "custom", path: ["excludedPartNumbers", index, "number"], message: "同じ品番を重複して除外できません。" });
+      }
+      numbers.add(item.number);
+      if (!partNumbers.some((part) => part.number === item.number)) {
+        ctx.addIssue({ code: "custom", path: ["excludedPartNumbers", index, "number"], message: "除外品番は facts に含まれている必要があります。" });
+      }
+      if (!item.reason.trim()) {
+        ctx.addIssue({ code: "custom", path: ["excludedPartNumbers", index, "reason"], message: "掲載から除外する理由を記録してください。" });
+      }
+      if (visibleText.includes(item.number)) {
+        ctx.addIssue({ code: "custom", path: ["excludedPartNumbers", index, "number"], message: "掲載除外した品番がタイトル、説明、写真説明などの表示箇所に残っています。" });
+      }
+    }
+    if (partNumbers.length && numbers.size >= partNumbers.length) {
+      ctx.addIssue({ code: "custom", path: ["excludedPartNumbers"], message: "すべての品番が掲載除外されています。" });
+    }
   }),
 });
 
