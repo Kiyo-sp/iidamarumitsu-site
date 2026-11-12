@@ -1,0 +1,92 @@
+---
+import { GA4_MEASUREMENT_ID, isValidGa4MeasurementId } from "../lib/analytics";
+
+const measurementId = GA4_MEASUREMENT_ID;
+const enabled = isValidGa4MeasurementId(measurementId) && process.env.PREVIEW_DRAFTS !== "1";
+---
+{enabled && (
+  <script is:inline define:vars={{ measurementId }}>
+    (() => {
+      const hostname = window.location.hostname.toLowerCase();
+      if (hostname !== "iidamarumitsu.jp" && hostname !== "www.iidamarumitsu.jp") return;
+
+      const disabledFlag = `ga-disable-${measurementId}`;
+      const isStopped = () => {
+        let optedOut = false;
+        try {
+          optedOut = window.localStorage.getItem("marumitsu-ga-opt-out") === "1";
+        } catch {
+          // Storage が利用できない環境では、GPC の設定だけを確認する。
+        }
+        const stopped = optedOut || navigator.globalPrivacyControl === true;
+        if (stopped) window[disabledFlag] = true;
+        return stopped || window[disabledFlag] === true;
+      };
+
+      if (isStopped()) return;
+
+      window.addEventListener("storage", (event) => {
+        if (event.key === "marumitsu-ga-opt-out" && event.newValue === "1") {
+          window[disabledFlag] = true;
+        }
+      });
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      window.gtag = gtag;
+      gtag("js", new Date());
+
+      const pagePath = window.location.pathname;
+      const config = {
+        page_location: window.location.origin + pagePath,
+        page_title: document.title,
+        allow_google_signals: false,
+        allow_ad_personalization_signals: false,
+      };
+      try {
+        if (document.referrer) config.page_referrer = new URL(document.referrer).origin;
+      } catch {
+        // 不正な referrer は送らない。
+      }
+      gtag("config", measurementId, config);
+
+      const loader = document.createElement("script");
+      loader.async = true;
+      loader.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
+      document.head.appendChild(loader);
+
+      document.addEventListener("click", (event) => {
+        if (isStopped()) return;
+        const target = event.target;
+        const element = target instanceof Element ? target : target?.parentElement;
+        const link = element?.closest("a[href]");
+        if (!link) return;
+
+        let eventName = "";
+        if (link.protocol.toLowerCase() === "tel:") {
+          eventName = "click_tel";
+        } else {
+          let hostname = "";
+          try {
+            hostname = new URL(link.href, window.location.href).hostname.toLowerCase();
+          } catch {
+            return;
+          }
+          if (hostname === "jp.mercari.com" || hostname === "mercari-shops.com" || hostname.endsWith(".mercari-shops.com")) {
+            eventName = "click_mercari";
+          }
+        }
+        if (!eventName) return;
+
+        const linkPosition = link.closest("header") ? "header" : link.closest("footer") ? "footer" : "content";
+        gtag("event", eventName, {
+          send_to: measurementId,
+          page_path: pagePath,
+          link_position: linkPosition,
+        });
+      });
+    })();
+  </script>
+)}

@@ -1,5 +1,6 @@
 ---
 import { COMPANY } from "../lib/site";
+import GoogleAnalytics from "../components/GoogleAnalytics.astro";
 interface Props { title: string; description: string; jsonLd?: object[]; noindex?: boolean; wide?: boolean; ogType?: string }
 const { title, description, jsonLd = [], noindex = false, wide = false, ogType = "article" } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -22,6 +23,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
   {jsonLd.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
+  <GoogleAnalytics />
 </head>
 <body>
   <header class="site-header">
@@ -42,6 +44,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
       <p class="f-name">{COMPANY.name}</p>
       {COMPANY.stores.map((st) => <p>{st.name}：{st.address}</p>)}
       <p>TEL <a href={COMPANY.telHref}>{COMPANY.tel}</a>（{COMPANY.hours}）</p>
+      <p><a href="/privacy/">アクセス解析について</a></p>
       <p class="f-copy">© {COMPANY.name}</p>
     </div>
   </footer>

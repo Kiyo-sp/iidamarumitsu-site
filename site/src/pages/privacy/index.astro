@@ -1,0 +1,72 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { GA4_MEASUREMENT_ID, isValidGa4MeasurementId } from "../../lib/analytics";
+const measurementId = isValidGa4MeasurementId(GA4_MEASUREMENT_ID) ? GA4_MEASUREMENT_ID : "";
+---
+<BaseLayout title="アクセス解析について" description="当サイトのアクセス解析の利用内容と、このブラウザでの設定についてご案内します。">
+  <h1>アクセス解析について</h1>
+  <p>当サイトでは、サイトの改善を目的としてGoogle Analytics 4を利用し、ページ閲覧、電話リンクのクリック、メルカリへのリンククリック等を測定します。計測にはCookie等が利用されます。</p>
+  <p>電話リンクのクリックは通話成立を、メルカリへのリンククリックは購入完了を示すものではありません。計測イベントに氏名、メールアドレス、お客様の電話番号や車台番号を含めません。</p>
+  <p>Googleによるデータ利用については、<a href="https://policies.google.com/technologies/partner-sites?hl=ja" target="_blank" rel="noopener">Googleのサービスを使用するサイトやアプリから収集した情報のGoogleによる使用</a>および<a href="https://policies.google.com/privacy?hl=ja" target="_blank" rel="noopener">Googleプライバシーポリシー</a>をご確認ください。</p>
+
+  <section class="analytics-settings" aria-labelledby="analytics-settings-title">
+    <h2 id="analytics-settings-title">このブラウザでの設定</h2>
+    <p>このブラウザでのアクセス解析を停止、または再開できます。設定の変更後、ページを再読み込みします。</p>
+    <button type="button" id="analytics-toggle">このブラウザで解析を停止</button>
+    <p id="analytics-status" aria-live="polite"></p>
+  </section>
+</BaseLayout>
+
+<script is:inline define:vars={{ measurementId }}>
+  (() => {
+    const key = "marumitsu-ga-opt-out";
+    const button = document.getElementById("analytics-toggle");
+    const status = document.getElementById("analytics-status");
+    if (!button || !status) return;
+
+    const isOptedOut = () => {
+      try {
+        return window.localStorage.getItem(key) === "1";
+      } catch {
+        return false;
+      }
+    };
+
+    const update = () => {
+      if (navigator.globalPrivacyControl === true) {
+        button.textContent = "ブラウザの設定により解析を停止中";
+        button.disabled = true;
+        status.textContent = "ブラウザのプライバシー設定により、アクセス解析は停止しています。";
+        return;
+      }
+      const stopped = isOptedOut();
+      button.disabled = false;
+      button.textContent = stopped ? "このブラウザで解析を再開" : "このブラウザで解析を停止";
+      status.textContent = stopped ? "このブラウザではアクセス解析を停止しています。" : "このブラウザではアクセス解析を利用する設定です。";
+    };
+
+    button.addEventListener("click", () => {
+      try {
+        if (isOptedOut()) window.localStorage.removeItem(key);
+        else {
+          if (measurementId) window[`ga-disable-${measurementId}`] = true;
+          window.localStorage.setItem(key, "1");
+        }
+      } catch {
+        status.textContent = "ブラウザの設定を保存できませんでした。";
+        return;
+      }
+      window.location.reload();
+    });
+
+    update();
+  })();
+</script>
+
+<style>
+  .analytics-settings { margin-top: 32px; padding: 16px; border: 1px solid var(--line); border-radius: 8px; }
+  .analytics-settings h2 { margin-top: 0; }
+  .analytics-settings button { padding: 8px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg-soft); color: var(--ink); font: inherit; cursor: pointer; }
+  .analytics-settings button:disabled { cursor: not-allowed; }
+  #analytics-status { margin-bottom: 0; font-size: 14px; color: var(--sub); }
+</style>

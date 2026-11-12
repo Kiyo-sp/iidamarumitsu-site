@@ -10,6 +10,7 @@ export const GET: APIRoute = async ({ site }) => {
     { loc: "/column/", lastmod: undefined },
     { loc: "/business/", lastmod: undefined },
     { loc: "/news/", lastmod: undefined },
+    { loc: "/privacy/", lastmod: undefined },
     ...entries.map((e) => ({ loc: `/column/${e.id}/`, lastmod: (e.data.updatedAt ?? e.data.publishedAt).toISOString().slice(0, 10) })),
     ...news.map((e) => ({ loc: `/news/${e.id}/`, lastmod: e.data.date.toISOString().slice(0, 10) })),
   ];
