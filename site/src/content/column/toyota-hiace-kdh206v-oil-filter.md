@@ -4,7 +4,7 @@ description: ハイエース KDH206Vのオイルエレメントを用意する�
 updatedAt: 2026-11-12
 kind: vehicle-part
 audience: both
-status: draft
+status: approved
 publishedAt: 2026-10-30
 vehicle:
   maker: トヨタ
@@ -53,11 +53,9 @@ facts:
 photos:
   - src: ../../assets/photos/toyota-hiace-kdh206v-oil-filter-1.jpg
     alt: MICRO T1637の実物とパッケージ。KDH206Vへの適合は車台番号からご確認ください。
-reviewPending:
-  - 元データ照合と公開前の内容確認が必要
 ---
 
-「次のオイル交換に向けて、エレメントも用意しておこうかな」。仕事で活躍するハイエース。オイル交換の時期が近づくと、そんな準備をされる方もいらっしゃると思います。今回は、ハイエースKDH206Vで当社の出荷実績があるオイルエレメントをご紹介します。
+「次のオイル交換に向けて、エレメントも用意しておこうかな」。仕事で活躍するハイエース。オイル交換の時期が近づくと、そんな準備をされる方もいらっしゃると思います。今回は、KDH206Vとオイルエレメントの組み合わせで販売明細に記録された情報をご紹介します。
 
 ## 当社で扱っている品番「T1637」
 

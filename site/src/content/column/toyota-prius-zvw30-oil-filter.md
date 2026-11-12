@@ -3,7 +3,7 @@ title: プリウス ZVW30のオイルエレメント｜品番と交換部品の�
 description: プリウス ZVW30のオイルエレメントを用意するときに確認したい型式、メーカー公式カタログ、注文前の確認事項をまとめました。
 kind: vehicle-part
 audience: both
-status: draft
+status: approved
 publishedAt: 2026-11-12
 vehicle:
   maker: トヨタ
@@ -64,9 +64,6 @@ photos:
   - src: ../../assets/photos/toyota-prius-zvw30-oil-filter-1.jpg
     alt: MICRO O1648のオイルエレメントと箱。
 updatedAt: 2026-11-12
-reviewPending:
-  - 元データ照合と公開前の内容確認が必要
-  - 新原稿の62行と現在の集計54件の期間・数え方を元データで照合
 ---
 
 「プリウス用のオイルエレメント、どれを注文すればいい？」ネットで探すと、同じプリウス用でも品番や見た目が違う商品が並びます。今回は、丸光で取扱実績がある品番を例に、ZVW30のオイルエレメントを用意するときの確認ポイントをご紹介します。

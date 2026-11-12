@@ -3,7 +3,7 @@ title: アクア NHP10のワイパー｜替えゴムとブレードの選び方
 description: アクア NHP10のワイパー交換で迷ったときに確認したい、替えゴムとブレード本体の違い、見積もりの比べ方を紹介します。
 kind: vehicle-part
 audience: both
-status: draft
+status: approved
 publishedAt: 2026-11-12
 vehicle:
   maker: トヨタ
@@ -126,11 +126,6 @@ photos:
   - src: ../../assets/photos/toyota-aqua-nhp10-wiper-3.jpg
     alt: 撮影用サンプルを用いたブレード本体と替えゴムの形状比較。アクアへの適合や相互の取付可否を示すものではありません。
 updatedAt: 2026-11-12
-reviewPending:
-  - 元データ照合と公開前の内容確認が必要
-  - 原稿のUPシリーズ適用情報は、実績外品番を本文に掲載しない現行ルールに従い保留
-  - "原稿に記載された未確認のマルエヌ参照先: https://www.maruenu.co.jp/search_wiper/"
-  - "原稿に記載された未確認のマルエヌ参照先: https://www.maruenu.co.jp/search_wiper/419/"
 ---
 
 「ワイパーのゴムを替えたい。本体ごと交換すると、どれくらい違う？」替えゴムを探しているときも、ブレード本体ごとの交換を一緒に比べてみませんか。価格の差だけでなく、本体の状態や交換する範囲まで見てみると、ご自分に合う選び方が見つかります。今回はアクア NHP10を例に、替えゴムと本体の交換範囲の違いをご紹介します。

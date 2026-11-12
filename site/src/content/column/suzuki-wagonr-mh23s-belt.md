@@ -3,7 +3,7 @@ title: ワゴンR MH23Sの補機ベルト｜品番と必要本数の確認
 description: ワゴンR MH23Sの補機ベルトを探すときに確認したい交換箇所、品番、車両仕様をまとめました。
 kind: vehicle-part
 audience: both
-status: draft
+status: approved
 publishedAt: 2026-11-12
 vehicle:
   maker: スズキ
@@ -63,8 +63,6 @@ photos:
   - src: ../../assets/photos/suzuki-wagonr-mh23s-belt-4.jpg
     alt: バンドーの補機ベルト。左が4PK710K、右が4PK870K。
 updatedAt: 2026-11-12
-reviewPending:
-  - 元データ照合と公開前の内容確認が必要
 ---
 
 「MH23S用のベルトを探すと、似た品番がいくつも出てくる…」。ベルトを交換すると言われて探してみると、1本の商品も2本セットの商品もあり、どれを選べばよいか迷いますよね。今回は、ワゴンR MH23Sの交換用ベルトを用意するときに確認したいことをご紹介します。

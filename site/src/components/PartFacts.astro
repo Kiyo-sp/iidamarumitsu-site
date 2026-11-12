@@ -1,5 +1,5 @@
 ---
-// 出荷実績の表。値は frontmatter facts（集計スクリプトの出力）だけから出す。
+// 販売明細集計の表。値は frontmatter facts（集計スクリプトの出力）だけから出す。
 import { ym } from "../lib/site";
 const { facts, partLabel = facts.partName, excludedPartNumbers = [] } = Astro.props;
 const excludedNumbers = new Set(excludedPartNumbers.map((item) => item.number));
@@ -8,14 +8,12 @@ const hasExclusions = excludedNumbers.size > 0;
 const span = (ys: number[]) => (ys.length === 0 ? "年式不明" : ys[0] === ys.at(-1) ? `${ys[0]}年式` : `${ys[0]}〜${ys.at(-1)}年式`);
 ---
 <section class="facts">
-  <h2>{hasExclusions ? `${facts.vehicleName}（${facts.model}）の販売明細集計` : `${facts.vehicleName}（${facts.model}）で出荷実績のある品番`}</h2>
-  <p class="lead">{hasExclusions
-    ? `${ym(facts.period[0])}〜${ym(facts.period[1])}の販売明細で、${facts.vehicleName} ${facts.model} とともに記載されていた${partLabel}は${facts.shipments}件です。この件数は車両への適合を確認した出荷件数を示すものではありません。`
-    : `${ym(facts.period[0])}〜${ym(facts.period[1])}に、当社から${facts.vehicleName} ${facts.model} 向けに${partLabel}を${facts.shipments}件出荷しました。`}</p>
-  {hasExclusions && <p class="note">適合を確認できていない品番は、下の表に掲載していません。</p>}
+  <h2>{facts.vehicleName}（{facts.model}）の販売明細集計</h2>
+  <p class="lead">{ym(facts.period[0])}〜{ym(facts.period[1])}の販売明細に、{facts.vehicleName} {facts.model} と {partLabel} の組み合わせとして記録された件数は{facts.shipments}件です。</p>
+  {hasExclusions && <p class="note">この総件数には、適合未確認として表に掲載していない品番の販売明細も含みます。下の表には、該当品番を除いて掲載しています。</p>}
   <div class="table-scroll">
     <table>
-      <thead><tr><th>品番</th><th>部品メーカー</th><th>{hasExclusions ? "集計件数" : "出荷件数"}</th><th>{hasExclusions ? "販売明細に記載された年式" : "出荷した車両の年式"}</th></tr></thead>
+      <thead><tr><th>品番</th><th>部品メーカー</th><th>集計件数</th><th>販売明細に記載された年式</th></tr></thead>
       <tbody>
         {displayedPartNumbers.map((p) => (
           <tr><td><strong>{p.number}</strong></td><td>{p.maker}</td><td>{p.count}件</td><td>{span(p.years)}</td></tr>
@@ -23,12 +21,13 @@ const span = (ys: number[]) => (ys.length === 0 ? "年式不明" : ys[0] === ys.
       </tbody>
     </table>
   </div>
-  <p class="note">出典：{facts.source}（{ym(facts.period[0])}〜{ym(facts.period[1])}）。同じ型式でも年式・グレード・装備で品番が変わるため、この表は適合の保証ではありません。</p>
+  <p class="note">出典：{facts.source}（対象期間：{ym(facts.period[0])}〜{ym(facts.period[1])}）。件数は販売明細の行数で、販売個数・交換台数ではありません。この表は表示期間の取扱記録の紹介です。品番は車台番号とメーカーの適合情報から確認してください。</p>
   {!hasExclusions && facts.coParts.length > 0 && (
     <>
-      <h3>同じ車に同じ日に出荷されることが多かった部品</h3>
+      <h3>同じ型式・車台番号・日付の明細に記録された部品</h3>
+      <p class="note">各項目の件数は、同じ型式・車台番号・日付の記録にその部品が含まれた対象明細の行数です。交換回数ではなく、実際に一緒に交換されたかはこの集計からは分かりません。</p>
       <ul class="co">
-        {facts.coParts.map((c) => <li>{c.name}<span>{c.count}回</span></li>)}
+        {facts.coParts.map((c) => <li>{c.name}<span>{c.count}件</span></li>)}
       </ul>
     </>
   )}

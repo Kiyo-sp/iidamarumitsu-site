@@ -3,7 +3,7 @@ title: エブリイ DA64Vのブレーキパッド｜品番の確認と選び方
 description: エブリイ DA64Vのブレーキパッドを探すときに確認したい型式、見積もりの比べ方、注文時の車両情報をまとめました。
 kind: vehicle-part
 audience: both
-status: draft
+status: approved
 publishedAt: 2026-11-12
 vehicle:
   maker: スズキ
@@ -45,8 +45,6 @@ photos:
   - src: ../../assets/photos/suzuki-every-da64v-front-brake-pad-2.jpg
     alt: TN742Mのパッド表面と刻印の拡大。
 updatedAt: 2026-11-12
-reviewPending:
-  - 元データ照合と公開前の内容確認が必要
 ---
 
 「エブリイのパッドを交換すると言われたけれど、どの部品を選べばいいの？」ネットで探すと、同じエブリイ用でもいろいろな品番が出てきます。純正の見積もりが気になるときも、まずはお車に合う部品かを確認しましょう。

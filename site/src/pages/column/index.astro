@@ -6,9 +6,9 @@ const entries = (await getCollection("column", (e) => isPublic(e.data.status)))
   .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
 const byMaker = Map.groupBy(entries, (e) => e.data.vehicle?.maker ?? "部品の基礎");
 ---
-<BaseLayout title={`部品コラム｜${COMPANY.shortName}`} description="車種ごとに、飯田丸光部品が実際に出荷した部品の品番と交換の目安をまとめています。">
+<BaseLayout title={`部品コラム｜${COMPANY.shortName}`} description="車種ごとに、飯田丸光部品の販売明細に記録された品番と部品選びの確認点をまとめています。">
   <h1>部品コラム</h1>
-  <p>車種・型式ごとに、当社が実際に出荷した部品の品番と、交換の目安をまとめています。</p>
+  <p>車種・型式ごとに、販売明細に記録された品番と、部品選びで確認したいポイントをまとめています。</p>
   {[...byMaker].map(([maker, list]) => (
     <section>
       <h2>{maker}</h2>

@@ -101,17 +101,19 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
     <div class="wide">
       <p class="sec-kicker">COLUMN</p>
       <h2 class="sec-title">部品コラム</h2>
-      <p class="sec-lead">車種・型式ごとに、当社が実際に出荷した部品の品番と、交換の目安をまとめています。</p>
+      <p class="sec-lead">車種・型式ごとに、販売明細に記録された品番と、部品選びで確認したいポイントをまとめています。</p>
       <div class="col-grid">
-        {columns.map((e) => (
+        {columns.map((e) => {
+          const excludedNumbers = new Set((e.data.excludedPartNumbers ?? []).map((item) => item.number));
+          const listedPartCount = e.data.facts?.partNumbers.filter((item) => !excludedNumbers.has(item.number)).length ?? 0;
+          return (
           <a class="col-card" href={`/column/${e.id}/`}>
             <span class="col-car">{e.data.vehicle ? `${e.data.vehicle.maker} ${e.data.vehicle.name} ${e.data.vehicle.model}` : "部品の基礎"}</span>
             <span class="col-part">{e.data.part?.name}</span>
-            {e.data.facts && <span class="col-meta">{e.data.excludedPartNumbers?.length
-              ? `販売明細集計 ${e.data.facts.shipments}件 ／ 掲載品番 ${e.data.facts.partNumbers.length - e.data.excludedPartNumbers.length}種`
-              : `出荷実績 ${e.data.facts.shipments}件 ／ 品番 ${e.data.facts.partNumbers.length}種`}</span>}
+            {e.data.facts && <span class="col-meta">販売明細集計 {e.data.facts.shipments}件 ／ 掲載品番 {listedPartCount}種</span>}
           </a>
-        ))}
+          );
+        })}
       </div>
       <p class="more"><a href="/column/">コラムの一覧へ →</a></p>
     </div>
