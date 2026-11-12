@@ -20,6 +20,7 @@ const column = defineCollection({
     status: z.enum(["draft", "approved"]),
     publishedAt: z.coerce.date(),
     updatedAt: z.coerce.date().optional(),
+    reviewPending: z.array(z.string()).optional(),
     vehicle: z.object({ maker: z.string(), name: z.string(), model: z.string() }).optional(),
     part: z.object({ name: z.string(), safety: z.boolean() }).optional(),
     photos: z.array(z.object({ src: image(), alt: z.string() })).optional(),

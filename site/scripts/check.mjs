@@ -38,6 +38,7 @@ for (const file of listMarkdown(COLUMN_DIR)) {
   if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug)) err(file, "ファイル名（URL）は英小文字・数字・ハイフンだけにしてください。");
   for (const k of ["title", "description", "kind", "audience", "status", "publishedAt"]) if (!data[k]) err(file, `「${k}」がありません。`);
   if (!["draft", "approved"].includes(data.status)) err(file, "status は draft（下書き）か approved（公開）にしてください。");
+    if (data.status === "approved" && data.reviewPending?.length) err(file, "reviewPending に確認項目が残っているため、公開できません。");
   if (ids.has(slug)) err(file, "同じ URL の記事が 2 本あります。");
   ids.add(slug);
   commonBodyChecks(file, body);

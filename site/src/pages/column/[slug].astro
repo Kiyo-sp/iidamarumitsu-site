@@ -35,6 +35,10 @@ const jsonLd = [
 <BaseLayout title={`${d.title}｜${COMPANY.shortName}`} description={d.description} jsonLd={jsonLd} noindex={d.status !== "approved"}>
   <p class="crumb"><a href="/">トップ</a> › <a href="/column/">部品コラム</a></p>
   {d.status !== "approved" && <p class="draft">下書き（未承認）のプレビューです</p>}
+  {d.reviewPending?.length > 0 && <aside class="review-pending">
+    <h2>公開前に確認する項目</h2>
+    <ul>{d.reviewPending.map((item) => <li>{item}</li>)}</ul>
+  </aside>}
   <h1>{d.title}</h1>
   <p class="meta">{d.vehicle && `${d.vehicle.maker} ${d.vehicle.name} ${d.vehicle.model}`} ／ 更新 {(d.updatedAt ?? d.publishedAt).toISOString().slice(0, 10)}</p>
   {d.photos && d.photos.length > 0 && (
@@ -60,4 +64,7 @@ const jsonLd = [
   .photos img { width: 100%; max-width: 480px; height: auto; border-radius: 8px; }
   .photos figcaption { font-size: 13px; color: #888; margin-top: 4px; }
   .draft { background: #fdecea; color: #a50e0e; padding: 6px 10px; border-radius: 4px; font-size: 13px; display: inline-block; }
+  .review-pending { background: #fff8e1; border: 1px solid #e8c65a; border-radius: 6px; padding: 12px 16px; margin: 12px 0; overflow-wrap: anywhere; }
+  .review-pending h2 { font-size: 16px; margin: 0 0 6px; }
+  .review-pending ul { margin: 0; }
 </style>
