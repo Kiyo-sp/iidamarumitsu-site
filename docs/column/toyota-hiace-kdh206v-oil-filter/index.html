@@ -30,21 +30,36 @@
         window.dataLayer.push(arguments);
       }
       window.gtag = gtag;
-      gtag("js", new Date());
 
       const pagePath = window.location.pathname;
-      const config = {
-        page_location: window.location.origin + pagePath,
-        page_title: document.title,
-        allow_google_signals: false,
-        allow_ad_personalization_signals: false,
-      };
+      const pageLocation = window.location.origin + pagePath;
+      let pageReferrer = "";
       try {
-        if (document.referrer) config.page_referrer = new URL(document.referrer).origin;
+        if (document.referrer) pageReferrer = new URL(document.referrer).origin;
       } catch {
         // 不正な referrer は送らない。
       }
-      gtag("config", measurementId, config);
+
+      gtag("set", {
+        send_page_view: false,
+        page_location: pageLocation,
+        page_referrer: pageReferrer,
+      });
+      gtag("js", new Date());
+      gtag("config", measurementId, {
+        page_location: pageLocation,
+        page_referrer: pageReferrer,
+        page_title: document.title,
+        send_page_view: false,
+        allow_google_signals: false,
+        allow_ad_personalization_signals: false,
+      });
+      gtag("event", "page_view", {
+        send_to: measurementId,
+        page_location: pageLocation,
+        page_referrer: pageReferrer,
+        page_title: document.title,
+      });
 
       const loader = document.createElement("script");
       loader.async = true;
