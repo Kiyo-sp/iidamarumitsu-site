@@ -40,7 +40,7 @@ const jsonLd = [
     <ul>{d.reviewPending.map((item) => <li>{item}</li>)}</ul>
   </aside>}
   <h1>{d.title}</h1>
-  <p class="meta">{d.vehicle && `${d.vehicle.maker} ${d.vehicle.name} ${d.vehicle.model}`} ／ 更新 {(d.updatedAt ?? d.publishedAt).toISOString().slice(0, 10)}</p>
+  <p class="meta">{d.vehicle && `${d.vehicle.maker} ${d.vehicle.name} ${d.vehicle.model} ／ `}更新 {(d.updatedAt ?? d.publishedAt).toISOString().slice(0, 10)}</p>
   {d.photos && d.photos.length > 0 && (
     <div class="photos">
       {d.photos.map((p, i) => (
@@ -67,4 +67,7 @@ const jsonLd = [
   .review-pending { background: #fff8e1; border: 1px solid #e8c65a; border-radius: 6px; padding: 12px 16px; margin: 12px 0; overflow-wrap: anywhere; }
   .review-pending h2 { font-size: 16px; margin: 0 0 6px; }
   .review-pending ul { margin: 0; }
+  .body :global(.column-diagram) { margin: 24px 0; max-width: 480px; }
+  .body :global(.column-diagram svg) { display: block; width: 100%; height: auto; }
+  .body :global(.column-diagram figcaption) { color: var(--sub); font-size: 13px; }
 </style>

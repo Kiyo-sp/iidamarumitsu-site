@@ -45,6 +45,8 @@ photos:
   - src: ../../assets/photos/suzuki-every-da64v-front-brake-pad-2.jpg
     alt: TN742Mのパッド表面と刻印の拡大。
 updatedAt: 2026-11-12
+editorialReferences: >-
+  [Astemo公式ブレーキパッドカタログ・スズキ編](https://www.aftermarket.astemo.com/japan/ja/automotive/assets/docs/BRF_ASTEMO_BRAKE_PAD_2024_CATALOG_JA.pdf#page=119)、[曙ブレーキ公式・スズキ車種適用表](https://www.akebono-brake.com/product_technology/aftermarket/docs/pf09_suzuki.pdf)
 ---
 
 「エブリイのパッドを交換すると言われたけれど、どの部品を選べばいいの？」ネットで探すと、同じエブリイ用でもいろいろな品番が出てきます。純正の見積もりが気になるときも、まずはお車に合う部品かを確認しましょう。
@@ -108,6 +110,3 @@ updatedAt: 2026-11-12
 「自分の車に合うかな？」と迷ったら、車検証をお手元にご相談ください。
 
 エブリイのブレーキ関連商品は[丸光のメルカリShops内で検索できます](https://mercari-shops.com/search?shop_ids=2JN44BXf6XfXYJMbBeU7yr&in_shop=true&keyword=DA64V+%E3%83%96%E3%83%AC%E3%83%BC%E3%82%AD&in_stock=true)。検索結果には別の型式や種類の商品が含まれる場合があります。ご購入前に商品ページの適合条件を確認し、迷ったときは車検証をお手元にご相談ください。
-
-
-参照資料: [Astemo公式ブレーキパッドカタログ・スズキ編](https://www.aftermarket.astemo.com/japan/ja/automotive/assets/docs/BRF_ASTEMO_BRAKE_PAD_2024_CATALOG_JA.pdf#page=119)、[曙ブレーキ公式・スズキ車種適用表](https://www.akebono-brake.com/product_technology/aftermarket/docs/pf09_suzuki.pdf)

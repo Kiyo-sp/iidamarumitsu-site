@@ -62,7 +62,9 @@ photos:
     alt: バンドーの補機ベルト。左が4PK710K、右が4PK850K。
   - src: ../../assets/photos/suzuki-wagonr-mh23s-belt-4.jpg
     alt: バンドーの補機ベルト。左が4PK710K、右が4PK870K。
-updatedAt: 2026-11-12
+updatedAt: 2026-11-25
+editorialReferences: >-
+  [バンドー化学・自動車用Vリブドベルト](https://products.bandogrp.com/product/ribace_automotive_vribbedbelt/)、[GMB・ウォーターポンプのトラブルシューティング](https://www.gmb.jp/harmony/wps/wp-content/uploads/2024/03/td-trouble-shooting-water-pump.pdf)
 ---
 
 「MH23S用のベルトを探すと、似た品番がいくつも出てくる…」。ベルトを交換すると言われて探してみると、1本の商品も2本セットの商品もあり、どれを選べばよいか迷いますよね。今回は、ワゴンR MH23Sの交換用ベルトを用意するときに確認したいことをご紹介します。
@@ -76,6 +78,12 @@ updatedAt: 2026-11-12
 ## 「4PK」の後ろの数字が近くても、そのまま選ばない
 
 バンドー化学の説明では、PKの前の数字はベルトの山数、後ろの数字は周長を表します。見た目が似ていても、数字が違えば長さが異なります。
+
+### ベルトの印字を見分けるポイント
+
+同じ「4PK」でも、その後ろの数字が異なるとベルトの周長が異なります。ベルト本体や箱の表示を控えるときは、末尾の記号までお知らせください。上の販売明細は品番ごとの集計です。必要な本数や組み合わせは、交換箇所と車台番号から照会します。
+
+<figure class="column-diagram"><svg aria-label="4本のリブ（断面） ／ 表記例" role="img" viewBox="0 0 440 160" xmlns="http://www.w3.org/2000/svg"><title>4本のリブ（断面） ／ 表記例</title><g fill="#d5e9de" stroke="#24665f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.8"><path d="M80 58h120v14h-8l-8 15-8-15h-10l-8 15-8-15h-10l-8 15-8-15h-10l-8 15-8-15H80Z"></path><text text-anchor="middle" x="314" y="80">4PK710K</text></g><text text-anchor="middle" x="145" y="145">4本のリブ（断面）</text><text text-anchor="middle" x="302" y="145">表記例</text></svg><figcaption>説明図　4本のリブ（断面） ／ 表記例（形状・寸法は模式表示）</figcaption></figure>
 
 ## 「純正の見積もりが高い…」ほかの選択肢は？
 
@@ -120,6 +128,3 @@ updatedAt: 2026-11-12
 #### Q. 末尾の記号まで同じものを選ぶ必要がありますか？
 
 末尾の記号も含めて品番をお知らせください。似た番号でも仕様が違う場合があるため、メーカーの適合情報と合わせて確認します。
-
-
-参照資料: [バンドー化学・自動車用Vリブドベルト](https://products.bandogrp.com/product/ribace_automotive_vribbedbelt/)、[GMB・ウォーターポンプのトラブルシューティング](https://www.gmb.jp/harmony/wps/wp-content/uploads/2024/03/td-trouble-shooting-water-pump.pdf)

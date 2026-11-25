@@ -53,6 +53,8 @@ facts:
 photos:
   - src: ../../assets/photos/toyota-hiace-kdh206v-oil-filter-1.jpg
     alt: MICRO T1637の実物とパッケージ。KDH206Vへの適合は車台番号からご確認ください。
+editorialReferences: >-
+  [日本マイクロフイルター工業株式会社・公式トヨタ適合カタログ（誌面34ページ）](https://micro-filter.co.jp/wordpress/wp-content/uploads/2024/03/4_TOYOTA%EF%BC%88%E3%83%88%E3%83%A8%E3%82%BF%EF%BC%89%E3%80%81LEXUS%EF%BC%88%E3%83%AC%E3%82%AF%E3%82%B5%E3%82%B9%EF%BC%89.pdf#page=34)
 ---
 
 「次のオイル交換に向けて、エレメントも用意しておこうかな」。仕事で活躍するハイエース。オイル交換の時期が近づくと、そんな準備をされる方もいらっしゃると思います。今回は、KDH206Vとオイルエレメントの組み合わせで販売明細に記録された情報をご紹介します。
@@ -102,6 +104,3 @@ photos:
 #### Q. ガソリン車や、別のハイエースにも品番は使えますか？
 
 車名だけでは判断できません。この記事はKDH206Vのご紹介です。別の型式のお車や複数台分のご注文では、車両ごとに品番を確認します。
-
-
-参照資料: [日本マイクロフイルター工業株式会社・公式トヨタ適合カタログ（誌面34ページ）](https://micro-filter.co.jp/wordpress/wp-content/uploads/2024/03/4_TOYOTA%EF%BC%88%E3%83%88%E3%83%A8%E3%82%BF%EF%BC%89%E3%80%81LEXUS%EF%BC%88%E3%83%AC%E3%82%AF%E3%82%B5%E3%82%B9%EF%BC%89.pdf#page=34)

@@ -109,6 +109,8 @@ updatedAt: 2026-11-12
 photos:
   - src: ../../assets/photos/subaru-sambar-tt2-ribbed-belt-1.jpg
     alt: バンドー化学 4PK825 の実物とパッケージ。
+editorialReferences: >-
+  [バンドー化学・自動車用Vリブドベルト](https://products.bandogrp.com/product/ribace_automotive_vribbedbelt/)
 ---
 
 「サンバーのベルトを交換したいけれど、いろいろ出てきて迷ってしまう」。4PK825や4PK650など、サンバートラックTT2のベルト探しでは、こんなことがあります。見た目や品番が似ていても、長さや使う箇所が違うためです。
@@ -166,6 +168,3 @@ photos:
 車検証の車台番号と、分かる範囲の情報でご相談ください。
 
 受付：平日 8:30〜17:30
-
-
-参照資料: [バンドー化学・自動車用Vリブドベルト](https://products.bandogrp.com/product/ribace_automotive_vribbedbelt/)

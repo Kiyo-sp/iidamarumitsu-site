@@ -71,6 +71,8 @@ updatedAt: 2026-11-12
 photos:
   - src: ../../assets/photos/daihatsu-tanto-la600s-front-brake-pad-1.jpg
     alt: トキコ TN760Mのブレーキパッドとパッケージ。適合は車台番号からご確認ください。
+editorialReferences: >-
+  [Astemo公式ブレーキパッドカタログ・スズキ編（LA600Sの適用区分）](https://www.aftermarket.astemo.com/japan/ja/automotive/assets/docs/BRF_ASTEMO_BRAKE_PAD_2024_CATALOG_JA.pdf#page=126)、[MKカシヤマ・品質保証](https://www.mk-kashiyama.com/research-qa/quality-assurance)
 ---
 
 「タントのブレーキパッドを探しているけれど、どの品番を選べばいいの？」ネットで調べると、同じタント用でもいくつかの品番が出てきます。型式がLA600Sで合っていても、それだけでは選びきれないことがあります。
@@ -126,6 +128,3 @@ photos:
 #### Q. 価格や在庫だけでも聞いてよいですか？
 
 もちろんです。「いくらくらい？」「取り寄せできる？」というご相談からで大丈夫です。車検証の情報と、ご希望のメーカーがあればお知らせください。部品の価格・在庫・取り寄せを確認してご案内します。
-
-
-参照資料: [Astemo公式ブレーキパッドカタログ・スズキ編（LA600Sの適用区分）](https://www.aftermarket.astemo.com/japan/ja/automotive/assets/docs/BRF_ASTEMO_BRAKE_PAD_2024_CATALOG_JA.pdf#page=126)、[MKカシヤマ・品質保証](https://www.mk-kashiyama.com/research-qa/quality-assurance)

@@ -64,6 +64,8 @@ photos:
   - src: ../../assets/photos/toyota-prius-zvw30-oil-filter-1.jpg
     alt: MICRO O1648のオイルエレメントと箱。
 updatedAt: 2026-11-12
+editorialReferences: >-
+  [日本マイクロフイルター工業株式会社・公式トヨタ適合カタログ（誌面39ページ)](https://micro-filter.co.jp/wordpress/wp-content/uploads/2024/03/4_TOYOTA%EF%BC%88%E3%83%88%E3%83%A8%E3%82%BF%EF%BC%89%E3%80%81LEXUS%EF%BC%88%E3%83%AC%E3%82%AF%E3%82%B5%E3%82%B9%EF%BC%89.pdf#page=39)
 ---
 
 「プリウス用のオイルエレメント、どれを注文すればいい？」ネットで探すと、同じプリウス用でも品番や見た目が違う商品が並びます。今回は、丸光で取扱実績がある品番を例に、ZVW30のオイルエレメントを用意するときの確認ポイントをご紹介します。
@@ -107,6 +109,3 @@ updatedAt: 2026-11-12
 #### Q. 品番の先頭は英字のOですか？
 
 ここで紹介した品番は、英字Oから始まるO1648です。箱や明細の表記を合わせて確認しましょう。
-
-
-参照資料: [日本マイクロフイルター工業株式会社・公式トヨタ適合カタログ（誌面39ページ)](https://micro-filter.co.jp/wordpress/wp-content/uploads/2024/03/4_TOYOTA%EF%BC%88%E3%83%88%E3%83%A8%E3%82%BF%EF%BC%89%E3%80%81LEXUS%EF%BC%88%E3%83%AC%E3%82%AF%E3%82%B5%E3%82%B9%EF%BC%89.pdf#page=39)

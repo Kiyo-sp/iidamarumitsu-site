@@ -2,23 +2,62 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { COMPANY, isPublic } from "../../lib/site";
-const entries = (await getCollection("column", (e) => isPublic(e.data.status)))
+
+const entries = (await getCollection("column", (entry) => isPublic(entry.data.status)))
   .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
-const byMaker = Map.groupBy(entries, (e) => e.data.vehicle?.maker ?? "部品の基礎");
+const searchText = ({ data }: typeof entries[number]) => {
+  const excluded = new Set(data.excludedPartNumbers?.map(({ number }) => number));
+  const partNumbers = data.facts?.partNumbers.filter(({ number }) => !excluded.has(number)) ?? [];
+  return [
+    data.title, data.description, data.vehicle?.maker, data.vehicle?.name,
+    data.vehicle?.model, data.part?.name, ...partNumbers.map(({ number }) => number),
+  ].filter(Boolean).join(" ");
+};
 ---
-<BaseLayout title={`部品コラム｜${COMPANY.shortName}`} description="車種ごとに、飯田丸光部品の販売明細に記録された品番と部品選びの確認点をまとめています。">
+<BaseLayout title={`部品コラム｜${COMPANY.shortName}`} description="車種別の部品選びや、部品の名前・仕組みを紹介します。">
   <h1>部品コラム</h1>
-  <p>車種・型式ごとに、販売明細に記録された品番と、部品選びで確認したいポイントをまとめています。</p>
-  {[...byMaker].map(([maker, list]) => (
-    <section>
-      <h2>{maker}</h2>
-      <ul class="list">
-        {list.map((e) => <li><a href={`/column/${e.id}/`}>{e.data.title}</a></li>)}
-      </ul>
-    </section>
-  ))}
+  <div id="column-search" hidden>
+    <label for="column-query">コラム検索</label>
+    <input id="column-query" type="search" placeholder="車種・型式・部品名・品番" />
+  </div>
+  <section aria-labelledby="column-list-heading">
+    <h2 id="column-list-heading">新着コラム</h2>
+    <p id="column-search-status" role="status" hidden></p>
+    <ul class="list">
+      {entries.map((entry) => (
+        <li data-column-search={searchText(entry)}><a href={`/column/${entry.id}/`}>{entry.data.title}</a></li>
+      ))}
+    </ul>
+  </section>
 </BaseLayout>
+<script>
+  const controls = document.querySelector<HTMLElement>("#column-search")!;
+  const input = document.querySelector<HTMLInputElement>("#column-query")!;
+  const heading = document.querySelector<HTMLElement>("#column-list-heading")!;
+  const status = document.querySelector<HTMLElement>("#column-search-status")!;
+  const normalize = (value: string) => value.normalize("NFKC").toLowerCase();
+  const entries = [...document.querySelectorAll<HTMLElement>("[data-column-search]")].map((item) => ({
+    item,
+    text: normalize(item.dataset.columnSearch ?? ""),
+  }));
+  const filter = () => {
+    const terms = normalize(input.value).trim().split(/\s+/).filter(Boolean);
+    let count = 0;
+    for (const { item, text } of entries) {
+      item.hidden = !terms.every((term) => text.includes(term));
+      if (!item.hidden) count++;
+    }
+    heading.textContent = terms.length ? "検索結果" : "新着コラム";
+    status.hidden = !terms.length;
+    status.textContent = count ? `${count}件` : "該当するコラムがありません。";
+  };
+  controls.hidden = false;
+  input.addEventListener("input", filter);
+  filter();
+</script>
 <style>
+  label { display: block; margin-bottom: 4px; font-weight: 700; }
+  input { width: min(100%, 24rem); padding: 8px 12px; border: 1px solid var(--sub); border-radius: 6px; font: inherit; }
   .list { padding-left: 1.2em; }
   .list li { margin: 6px 0; }
 </style>

@@ -55,6 +55,8 @@ photos:
   - src: ../../assets/photos/honda-nbox-jf1-stabilizer-link-2.jpg
     alt: GMB GSL-HO-19の品番ラベルとリンクの拡大。
 updatedAt: 2026-11-12
+editorialReferences: >-
+  [GMB・ステアリング＆サスペンションパーツ](https://www.gmb.jp/product/steering/)
 ---
 
 「車検でスタビリンクの交換と言われた。何を用意すればいい？」見積書に「スタビライザーリンク」や「スタビリンク」とあり、初めて部品を調べる方もいらっしゃると思います。今回はN-BOX JF1で、交換用の部品を探すときの確認ポイントをご紹介します。
@@ -98,6 +100,3 @@ updatedAt: 2026-11-12
 #### Q. 純正品と交換用メーカーの部品は、どう比べればよいですか？
 
 お車への適合、メーカー名、付属品、保証、本数をそろえて比較すると分かりやすくなります。ご希望の条件をお聞かせください。
-
-
-参照資料: [GMB・ステアリング＆サスペンションパーツ](https://www.gmb.jp/product/steering/)
