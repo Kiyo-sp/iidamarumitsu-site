@@ -5,7 +5,7 @@ import { COMPANY, isPublic } from "../../lib/site";
 const items = (await getCollection("news", (e) => isPublic(e.data.status))).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 <BaseLayout title={`お知らせ｜${COMPANY.shortName}`} description="飯田丸光部品からのお知らせ（休業日・取扱いのご案内など）です。">
-  <p class="crumb"><a href="/">トップ</a> › お知らせ</p>
+  <p class="crumb"><a href="/">HPトップ</a> › お知らせ</p>
   <h1>お知らせ</h1>
   {items.length === 0 ? <p>現在お知らせはありません。</p> : (
     <ul class="news">

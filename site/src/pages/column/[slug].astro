@@ -13,6 +13,10 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
+const brakePadArticles = entry.id === "brake-pad-and-disc-rotor"
+  ? (await getCollection("column", (item) => isPublic(item.data.status) && item.data.part?.name.includes("ブレーキパッド") === true))
+      .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
+  : [];
 const url = new URL(`/column/${entry.id}/`, Astro.site).href;
 const jsonLd = [
   {
@@ -33,7 +37,7 @@ const jsonLd = [
 ];
 ---
 <BaseLayout title={`${d.title}｜${COMPANY.shortName}`} description={d.description} jsonLd={jsonLd} noindex={d.status !== "approved"}>
-  <p class="crumb"><a href="/">トップ</a> › <a href="/column/">部品コラム</a></p>
+  <p class="crumb"><a href="/">HPトップ</a> › <a href="/column/">部品コラム</a></p>
   {d.status !== "approved" && <p class="draft">下書き（未承認）のプレビューです</p>}
   {d.reviewPending?.length > 0 && <aside class="review-pending">
     <h2>公開前に確認する項目</h2>
@@ -52,7 +56,17 @@ const jsonLd = [
     </div>
   )}
   {d.facts && <PartFacts facts={d.facts} partLabel={d.part?.name} excludedPartNumbers={d.excludedPartNumbers} />}
-  <article class="body"><Content /></article>
+  <article class="body" id={brakePadArticles.length ? "brake-pad-guide" : undefined}><Content /></article>
+  {brakePadArticles.length > 0 && (
+    <section aria-labelledby="brake-pad-articles">
+      <h2 id="brake-pad-articles">ブレーキパッドの記事</h2>
+      <ul>
+        {brakePadArticles.map(({ id, data }) => (
+          <li><a href={id === entry.id ? "#brake-pad-guide" : `/column/${id}/`}>{data.title}</a></li>
+        ))}
+      </ul>
+    </section>
+  )}
   <InquiryCTA safety={d.part?.safety} audience={d.audience} />
 </BaseLayout>
 <style>

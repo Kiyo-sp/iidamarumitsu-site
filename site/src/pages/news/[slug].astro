@@ -10,7 +10,7 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 <BaseLayout title={`${entry.data.title}｜${COMPANY.shortName}`} description={entry.data.title} noindex={entry.data.status !== "approved"}>
-  <p class="crumb"><a href="/">トップ</a> › <a href="/news/">お知らせ</a></p>
+  <p class="crumb"><a href="/">HPトップ</a> › <a href="/news/">お知らせ</a></p>
   <h1>{entry.data.title}</h1>
   <p class="date">{entry.data.date.toISOString().slice(0, 10)}</p>
   <article><Content /></article>
