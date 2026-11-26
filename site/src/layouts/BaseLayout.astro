@@ -69,6 +69,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; flex-wrap: wrap; }
   .logo { font-weight: 700; color: var(--ink); text-decoration: none; }
   nav { display: flex; gap: 16px; font-size: 14px; flex-wrap: wrap; }
+  .site-header nav { font-size: 16px; }
   nav a { text-decoration: none; color: var(--ink); }
   .nav-tel { color: var(--navy) !important; font-weight: 700; }
   main { padding: 24px 16px 56px; }
@@ -89,6 +90,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     .header-inner { flex-wrap: nowrap; min-height: 48px; }
     .logo { flex: none; font-size: 15px; }
     nav { flex-wrap: nowrap; overflow-x: auto; gap: 14px; font-size: 13px; white-space: nowrap; scrollbar-width: none; }
+    .site-header nav { font-size: 15px; }
   }
 </style>
 

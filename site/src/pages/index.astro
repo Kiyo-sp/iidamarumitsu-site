@@ -109,6 +109,50 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
     </div>
   </section>
 
+  <section class="sec" id="business">
+    <div class="wide">
+      <p class="sec-kicker">FOR BUSINESS</p>
+      <h2 class="sec-title">法人のお客様へ</h2>
+      <p class="sec-lead">飯田・下伊那エリアの、さまざまな業種のお客様に部品をお届けしています。</p>
+      <ul class="chips chips-lg">{customers.map((c) => <li>{c}</li>)}</ul>
+      <div class="grid3">
+        <div class="step"><span>1</span><p>お電話で、車台番号と必要な部品をお伝えください。</p></div>
+        <div class="step"><span>2</span><p>品番と在庫・納期を確認してご連絡します。</p></div>
+        <div class="step"><span>3</span><p>本店・生田店から、現場へお届けします。</p></div>
+      </div>
+      <p class="more"><a href="/business/">法人のお客様向けのご案内 →</a></p>
+    </div>
+  </section>
+
+  <section class="sec sec-soft" id="stores">
+    <div class="wide">
+      <p class="sec-kicker">STORES</p>
+      <h2 class="sec-title">店舗</h2>
+      <p class="sec-lead">飯田中心部の本店と北側の生田店（2店舗間 約15km）。南北からエリア全体をカバーします。</p>
+      <div class="grid2">
+        {COMPANY.stores.map((st) => (
+          <div class="store">
+            <h3>{st.name}<small>{st.area}</small></h3>
+            <p>{st.address}</p>
+            <iframe title={`${st.name}の地図`} src={mapSrc(st.map)} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        ))}
+      </div>
+      <p class="sec-note">TEL {COMPANY.tel}（{COMPANY.hours}）</p>
+    </div>
+  </section>
+
+  <section class="sec" id="shop">
+    <div class="wide shop">
+      <div>
+        <p class="sec-kicker">ONLINE SHOP</p>
+        <h2 class="sec-title">個人のお客様は、メルカリShopsでも</h2>
+        <p class="sec-lead">一部の部品はメルカリShopsでも販売しています。</p>
+      </div>
+      <a class="btn-navy shop-logo-button" href={COMPANY.mercari} target="_blank" rel="noopener"><img src="/site-media/mercari-shops-logo.png" alt="メルカリShops" /><span>ショップを見る →</span></a>
+    </div>
+  </section>
+
   <section class="sec sec-soft" id="column">
     <div class="wide">
       <p class="sec-kicker">COLUMN</p>
@@ -156,50 +200,6 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
         </div>
       </div>
       <p class="more"><a href="/column/">コラムの一覧へ →</a></p>
-    </div>
-  </section>
-
-  <section class="sec" id="business">
-    <div class="wide">
-      <p class="sec-kicker">FOR BUSINESS</p>
-      <h2 class="sec-title">法人のお客様へ</h2>
-      <p class="sec-lead">飯田・下伊那エリアの、さまざまな業種のお客様に部品をお届けしています。</p>
-      <ul class="chips chips-lg">{customers.map((c) => <li>{c}</li>)}</ul>
-      <div class="grid3">
-        <div class="step"><span>1</span><p>お電話で、車台番号と必要な部品をお伝えください。</p></div>
-        <div class="step"><span>2</span><p>品番と在庫・納期を確認してご連絡します。</p></div>
-        <div class="step"><span>3</span><p>本店・生田店から、現場へお届けします。</p></div>
-      </div>
-      <p class="more"><a href="/business/">法人のお客様向けのご案内 →</a></p>
-    </div>
-  </section>
-
-  <section class="sec sec-soft" id="stores">
-    <div class="wide">
-      <p class="sec-kicker">STORES</p>
-      <h2 class="sec-title">店舗</h2>
-      <p class="sec-lead">飯田中心部の本店と北側の生田店（2店舗間 約15km）。南北からエリア全体をカバーします。</p>
-      <div class="grid2">
-        {COMPANY.stores.map((st) => (
-          <div class="store">
-            <h3>{st.name}<small>{st.area}</small></h3>
-            <p>{st.address}</p>
-            <iframe title={`${st.name}の地図`} src={mapSrc(st.map)} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </div>
-        ))}
-      </div>
-      <p class="sec-note">TEL {COMPANY.tel}（{COMPANY.hours}）</p>
-    </div>
-  </section>
-
-  <section class="sec" id="shop">
-    <div class="wide shop">
-      <div>
-        <p class="sec-kicker">ONLINE SHOP</p>
-        <h2 class="sec-title">個人のお客様は、メルカリShopsでも</h2>
-        <p class="sec-lead">一部の部品はメルカリShopsでも販売しています。</p>
-      </div>
-      <a class="btn-navy shop-logo-button" href={COMPANY.mercari} target="_blank" rel="noopener"><img src="/site-media/mercari-shops-logo.png" alt="メルカリShops" /><span>ショップを見る →</span></a>
     </div>
   </section>
 
@@ -295,7 +295,7 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
   .news-bar li { display: flex; gap: 14px; padding: 4px 0; flex-wrap: wrap; }
   .news-bar time { color: var(--sub); }
   .news-more { font-size: 13px; }
-  .sec { padding: 64px 0; }
+  .sec { padding: 34px 0; }
   .sec-soft { background: var(--bg-soft); }
   .sec-kicker { color: var(--gold); font-size: 12px; letter-spacing: .2em; font-weight: 700; margin: 0; }
   .sec-title { font-size: 28px; margin: 4px 0 12px; border: 0; padding: 0; }
@@ -340,7 +340,7 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
   @media (max-width: 800px) {
     .hero h1 { font-size: 32px; }
     .grid2, .grid3, .col-grid { grid-template-columns: 1fr; }
-    .sec { padding: 48px 0; }
+    .sec { padding: 26px 0; }
     .sec-title { font-size: 23px; }
   }
 </style>
