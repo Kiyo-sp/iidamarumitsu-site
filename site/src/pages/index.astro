@@ -4,9 +4,12 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { COMPANY, POPULAR_PARTS, isPublic } from "../lib/site";
 
-const columns = (await getCollection("column", (e) => isPublic(e.data.status)))
+const publicColumns = await getCollection("column", (e) => isPublic(e.data.status));
+const columns = publicColumns
   .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
   .slice(0, 6);
+const asideColumns = ["air-conditioning-expansion-valve", "lower-arm-part-names"]
+  .flatMap((id) => publicColumns.filter((entry) => entry.id === id));
 
 const news = (await getCollection("news", (e) => isPublic(e.data.status)))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
@@ -119,7 +122,18 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
           );
         })}
       </div>
-      <div class="other-columns" id="other-columns"><h3>その他</h3><div class="aside-column-card"><h4>小言コラム</h4><p>部品の話を離れて、日々の仕事で感じたことや、ちょっとした話を綴ります。</p></div></div>
+      <div class="other-columns" id="other-columns">
+        <h3>その他</h3>
+        <div class="aside-column-card">
+          <h4>小言コラム</h4>
+          <p>日々の仕事で感じたことや、ちょっとした話を綴ります。</p>
+          <ul class="aside-column-links">
+            {asideColumns.map(({ id, data }) => (
+              <li><a href={`/column/${id}/`}>{data.title}</a></li>
+            ))}
+          </ul>
+        </div>
+      </div>
       <p class="more"><a href="/column/">コラムの一覧へ →</a></p>
     </div>
   </section>
@@ -266,6 +280,8 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
   .sec-title { font-size: 28px; margin: 4px 0 12px; border: 0; padding: 0; }
   .sec-lead { color: var(--sub); margin: 0 0 24px; max-width: 720px; }
   .sec-note { color: var(--sub); font-size: 14px; margin-top: 16px; }
+  .aside-column-links { margin: 10px 0 0; padding-inline-start: 1.25rem; }
+  .aside-column-links a { display: inline-block; padding-block: 5px; }
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
   .card { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 20px; }
