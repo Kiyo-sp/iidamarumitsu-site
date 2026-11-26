@@ -310,6 +310,38 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
   .news-more { font-size: 13px; }
   .sec { padding: 34px 0; }
   .sec-soft { background: var(--bg-soft); }
+  :global(main.main-wide) {
+    box-sizing: border-box;
+    width: calc(100% - 32px);
+    max-width: 1240px;
+    margin: 14px auto 22px;
+    border: 1px solid #adc4de;
+    border-radius: 18px;
+    box-shadow: 0 5px 24px #1a4b8e12;
+    position: relative;
+  }
+  :global(main.main-wide)::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 20px #4679b43b;
+    pointer-events: none;
+  }
+  #column {
+    box-sizing: border-box;
+    width: calc(100% - 32px);
+    max-width: 1160px;
+    margin: 16px auto 22px;
+    border: 2px solid #9bb9dd;
+    border-radius: 12px;
+    box-shadow: 0 5px 0 #e0e9f4;
+    scroll-margin-top: 66px;
+  }
+  @media (max-width: 600px) {
+    :global(main.main-wide) { width: calc(100% - 12px); margin-block: 8px 14px; border-radius: 12px; }
+    #column { width: calc(100% - 20px); margin-block: 12px 18px; }
+  }
   .sec-kicker { color: var(--gold); font-size: 12px; letter-spacing: .2em; font-weight: 700; margin: 0; }
   .sec-title { font-size: 28px; margin: 4px 0 12px; border: 0; padding: 0; }
   .sec-lead { color: var(--sub); margin: 0 0 24px; max-width: 720px; }
