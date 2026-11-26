@@ -58,15 +58,21 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
     <div class="wide hero-inner">
       <div class="hero-text-panel"><p class="hero-kicker">長野県飯田市の自動車部品・工具卸　昭和53年創業</p>
       <h1>必要な部品を、<br />必要なときに。</h1>
-      <p class="hero-lead">飯田の中心部と北部の2拠点から、整備工場・ディーラーの現場へ1日に何度でもお届けします。車台番号を伝えていただければ、品番はこちらでお調べします。</p>
+      <p class="hero-lead">飯田の中心部と北部の2拠点から、整備工場・ディーラーの現場へ1日に何度でもお届けします。</p>
       </div>
-      <div class="hero-actions">
+      <section class="hero-inquiry" aria-labelledby="hero-inquiry-heading">
+        <h2 id="hero-inquiry-heading">在庫・適合を問い合わせる</h2>
+        <p>車台番号が分かれば、品番をお調べします。</p>
+        <div class="hero-actions">
         <a class="btn-gold" href={COMPANY.telHref}>☎ {COMPANY.tel}　電話で問い合わせる</a>
         <a class="preview-cta" href="/contact/">メールでのお問い合わせ</a>
-        <a class="preview-cta hero-catalog-link" href="/parts/">取扱部品・用品を見る →</a>
-        <a class="btn-ghost" href="/column/">車種別の部品コラムを見る</a>
+        </div>
+        <p class="hero-hours">受付：{COMPANY.hours}</p>
+      </section>
+      <div class="hero-resources">
+        <a href="/parts/">取扱部品・用品を見る →</a>
+        <a href="/column/">部品コラムを見る →</a>
       </div>
-      <p class="hero-hours">受付：{COMPANY.hours}</p>
       <ul class="hero-points">
         <li><strong>2拠点</strong><span>本店・生田店</span></li>
         <li><strong>1日複数回</strong><span>デリバリー</span></li>
@@ -280,6 +286,13 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
   .hero h1 { font-size: 44px; line-height: 1.35; margin: 0 0 18px; border: 0; padding: 0; }
   .hero-lead { max-width: 620px; color: rgba(255,255,255,.85); margin: 0 0 28px; }
   .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero-inquiry { max-width: 735px; box-sizing: border-box; padding: 16px; border: 1px solid #c7d5e6; border-radius: 8px; background: #fff; color: #172e4a; }
+  .hero-inquiry h2 { margin: 0 0 5px; font-size: 19px; }
+  .hero-inquiry p { margin: 0 0 10px; }
+  .hero-inquiry .hero-hours { margin: 8px 0 0; }
+  .hero-resources { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 12px; font-size: 14px; }
+  .hero-resources a { color: #1a4b8e; }
+  .hero-inquiry .hero-actions > a { box-sizing: border-box; }
   .hero-hours { font-size: 13px; color: rgba(255,255,255,.7); margin: 10px 0 0; }
   .hero-points { list-style: none; padding: 0; margin: 40px 0 0; display: flex; gap: 12px; flex-wrap: wrap; }
   .hero-points li { border: 1px solid rgba(200,168,78,.45); border-radius: 8px; padding: 12px 18px; min-width: 140px; }

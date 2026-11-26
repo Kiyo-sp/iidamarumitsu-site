@@ -1,0 +1,9 @@
+---
+import { COMPANY } from "../lib/site";
+---
+<a class="site-brand" href="/" aria-label={`${COMPANY.name} ホーム`}>{COMPANY.shortName}</a>
+
+<style>
+  a.site-brand { flex: none; color: #1a4b8e; font: 900 29px/1.25 "Yu Gothic", "Meiryo", sans-serif; letter-spacing: .06em; white-space: nowrap; text-decoration: none; text-shadow: 1px 2px #becbdb; }
+  @media (max-width: 600px) { a.site-brand { font-size: 23px; } }
+</style>
