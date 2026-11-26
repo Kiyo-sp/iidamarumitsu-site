@@ -1,5 +1,6 @@
 ---
 import { COMPANY } from "../lib/site";
+import FooterPartsNav from "../components/FooterPartsNav.astro";
 import GoogleAnalytics from "../components/GoogleAnalytics.astro";
 interface Props { title: string; description: string; jsonLd?: object[]; noindex?: boolean; wide?: boolean; ogType?: string }
 const { title, description, jsonLd = [], noindex = false, wide = false, ogType = "article" } = Astro.props;
@@ -50,7 +51,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
       <p>FAX {COMPANY.fax}</p>
       <p>休業日　{COMPANY.closed}</p>
       <p><a href="/privacy/">アクセス解析について</a></p>
-      </div><nav class="footer-parts" aria-labelledby="bottom-parts-title"><h2 id="bottom-parts-title">取扱部品・用品</h2><ul><li><a href="/parts/genuine/">純正部品・第2ブランド</a></li><li><a href="/parts/repair/">機能部品・消耗部品</a></li><li><a href="/parts/electrical/">電気・電装系部品</a></li><li><a href="/parts/recycled/">リビルト・中古部品</a></li><li><a href="/parts/chemical/">ケミカル・オイル</a></li><li><a href="/parts/tools/">工具・整備用品 <small>今後展開予定</small></a></li></ul></nav></div>
+      </div><FooterPartsNav /></div>
       <p class="f-copy">© {COMPANY.name}</p>
     </div>
   </footer>
@@ -114,3 +115,4 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 .delivery-mark .truck-wheel:last-child{right:24px}
 @media(max-width:600px){.delivery-mark{width:168px;height:49px}}
 .footer-info-grid{display:grid;grid-template-columns:1fr auto;gap:22px 48px;align-items:start}.site-footer .footer-parts{display:block;white-space:normal;overflow:visible;text-align:left;min-width:180px}.site-footer .footer-parts h2{margin:0 0 6px;padding:0;border:0;font-size:14px}.footer-parts ul{margin:0;padding:0;list-style:none}.footer-parts li{margin:3px 0}.site-footer .footer-parts a{color:#1a4b8e;text-decoration:underline;text-underline-offset:2px}.footer-parts small{color:#52657c;margin-left:4px}@media(max-width:600px){.footer-info-grid{grid-template-columns:1fr;gap:14px}}</style>
+
