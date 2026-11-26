@@ -2,7 +2,7 @@
 // トップ。記載は現行サイト（docs/）と、仕入・販売実績で確認できた事実だけ。
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { COMPANY, GENUINE_MAKERS, AFTERMARKET_MAKERS, POPULAR_PARTS, isPublic } from "../lib/site";
+import { COMPANY, POPULAR_PARTS, isPublic } from "../lib/site";
 
 const columns = (await getCollection("column", (e) => isPublic(e.data.status)))
   .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
@@ -48,11 +48,14 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
 >
   <section class="hero">
     <div class="wide hero-inner">
-      <p class="hero-kicker">長野県飯田市の自動車部品・工具卸　昭和53年創業</p>
+      <div class="hero-text-panel"><p class="hero-kicker">長野県飯田市の自動車部品・工具卸　昭和53年創業</p>
       <h1>必要な部品を、<br />必要なときに。</h1>
       <p class="hero-lead">飯田の中心部と北部の2拠点から、整備工場・ディーラーの現場へ1日に何度でもお届けします。車台番号を伝えていただければ、品番はこちらでお調べします。</p>
+      </div>
       <div class="hero-actions">
         <a class="btn-gold" href={COMPANY.telHref}>☎ {COMPANY.tel}　電話で問い合わせる</a>
+        <a class="preview-cta" href="/contact/">メールでのお問い合わせ</a>
+        <a class="preview-cta hero-catalog-link" href="/parts/">取扱部品・用品を見る →</a>
         <a class="btn-ghost" href="/column/">車種別の部品コラムを見る</a>
       </div>
       <p class="hero-hours">受付：{COMPANY.hours}</p>
@@ -83,13 +86,14 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
       <div class="grid2">
         <div class="card">
           <h3>純正部品</h3>
-          <ul class="chips">{GENUINE_MAKERS.map((m) => <li>{m}</li>)}</ul>
+          <ul class="top-maker-logos"><li><img src="/site-media/logo-ede841bae07f58ba.png" alt="" loading="lazy"><span>トヨタ</span></li><li><img src="/site-media/logo-ccae467533b7e310.png" alt="" loading="lazy"><span>日産</span></li><li><img src="/site-media/logo-395613072d9fb7e8.png" alt="" loading="lazy"><span>ホンダ</span></li><li><img src="/site-media/logo-73d53da85d010261.png" alt="" loading="lazy"><span>スズキ</span></li><li><img src="/site-media/logo-b1f71f3403fd1f3b.png" alt="" loading="lazy"><span>ダイハツ</span></li><li><img src="/site-media/logo-39fe368def525a54.png" alt="" loading="lazy"><span>スバル</span></li><li><img src="/site-media/logo-580c6d0f5c0c7222.png" alt="" loading="lazy"><span>三菱</span></li><li><img src="/site-media/logo-905731c0a7dd4e2e.png" alt="" loading="lazy"><span>マツダ</span></li><li><img src="/site-media/ISUZU-%E3%83%AD%E3%82%B4.png" alt="" loading="lazy"><span>いすゞ</span></li><li><img src="/site-media/FUSO-%E3%83%AD%E3%82%B4.png" alt="" loading="lazy"><span>三菱ふそう</span></li></ul>
         </div>
         <div class="card">
           <h3>優良部品メーカー（主な取扱い）</h3>
-          <ul class="chips">{AFTERMARKET_MAKERS.map((m) => <li>{m}</li>)}</ul>
+          <ul class="top-maker-logos"><li><img src="/site-media/logo-055217bfa6ea771e.png" alt="" loading="lazy"><span>日本マイクロフイルター工業</span></li><li><img src="/site-media/logo-39cd489875225b53.png" alt="Astemo" loading="lazy"><span>トキコ</span></li><li><img src="/site-media/logo-a5ba1399185383aa.png" alt="" loading="lazy"><span>GMB</span></li><li><img src="/site-media/logo-a21f3ba5c49703e1.png" alt="" loading="lazy"><span>バンドー化学</span></li><li><img src="/site-media/%E5%A4%A7%E9%87%8E%E3%82%B4%E3%83%A0%E5%B7%A5%E6%A5%AD%E3%83%AD%E3%82%B4.png" alt="" loading="lazy"><span>大野ゴム工業</span></li><li><img src="/site-media/logo-95d9395a9e9e7503.png" alt="" loading="lazy"><span>日本特殊陶業</span></li><li><span>デンソー</span></li><li><img src="/site-media/logo-df8032398e81cdf2.png" alt="" loading="lazy"><span>DIXCEL</span></li><li><img src="/site-media/logo-27a6c93cfa8e0f5c.png" alt="" loading="lazy"><span>武蔵オイルシール工業</span></li><li><img src="/site-media/logo-8fb97afc0ea1506c.png" alt="" loading="lazy"><span>スタンレー電気</span></li></ul>
         </div>
       </div>
+      <div class="parts-menu-after-makers"><p><a href="/parts/">取扱部品・用品を見る</a></p><nav class="part-choice-nav" aria-label="取扱部品の分類"><ul class="part-choice-list"><li><a href="/parts/genuine/"><span>純正部品・第2ブランド</span><span aria-hidden="true">→</span></a></li><li><a href="/parts/repair/"><span>機能部品・消耗部品</span><span aria-hidden="true">→</span></a></li><li><a href="/parts/electrical/"><span>電気・電装系部品</span><span aria-hidden="true">→</span></a></li><li><a href="/parts/recycled/"><span>リビルト・中古部品</span><span aria-hidden="true">→</span></a></li><li><a href="/parts/chemical/"><span>ケミカル・オイル</span><span aria-hidden="true">→</span></a></li><li><a href="/parts/tools/"><span>工具・整備用品 <small>今後展開予定</small></span><span aria-hidden="true">→</span></a></li></ul></nav></div>
       <div class="card card-wide">
         <h3>よくご注文いただく部品</h3>
         <ul class="chips chips-soft">{POPULAR_PARTS.map((m) => <li>{m}</li>)}</ul>
@@ -115,6 +119,7 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
           );
         })}
       </div>
+      <div class="other-columns" id="other-columns"><h3>その他</h3><div class="aside-column-card"><h4>小言コラム</h4><p>部品の話を離れて、日々の仕事で感じたことや、ちょっとした話を綴ります。</p></div></div>
       <p class="more"><a href="/column/">コラムの一覧へ →</a></p>
     </div>
   </section>
@@ -159,7 +164,7 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
         <h2 class="sec-title">個人のお客様は、メルカリShopsでも</h2>
         <p class="sec-lead">一部の部品はメルカリShopsでも販売しています。</p>
       </div>
-      <a class="btn-navy" href={COMPANY.mercari} target="_blank" rel="noopener">メルカリShopsで見る →</a>
+      <a class="btn-navy shop-logo-button" href={COMPANY.mercari} target="_blank" rel="noopener"><img src="/site-media/mercari-shops-logo.png" alt="メルカリShops" /><span>ショップを見る →</span></a>
     </div>
   </section>
 
@@ -167,6 +172,7 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
     <div class="wide">
       <p class="sec-kicker">COMPANY</p>
       <h2 class="sec-title">会社概要</h2>
+      <a class="preview-cta" href="/company/">詳しい会社概要を見る →</a>
       <table class="company">
         <tbody>
           {companyInfo.map(([k, v]) => <tr><th>{k}</th><td>{v}</td></tr>)}
@@ -176,13 +182,60 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
     </div>
   </section>
 
-  <section class="contact">
-    <div class="wide">
-      <h2>部品のお取り寄せ・在庫確認は、お気軽にお電話ください</h2>
-      <a class="btn-gold" href={COMPANY.telHref}>☎ {COMPANY.tel}</a>
-      <p>受付：{COMPANY.hours}</p>
-    </div>
-  </section>
+  <style is:inline>:root{--dark:#0c1829;--gold:#c8a84e;--navy:#1a4b8e;--ink:#1d1d1f;--sub:#5f6368;--line:#e3e7ee;--bg-soft:#f5f8fc;--warn-bg:#fff7e6;--warn:#8a5300}*{box-sizing:border-box}body{color:var(--ink);-webkit-font-smoothing:antialiased;background:#fff;margin:0;font-family:Noto Sans JP,system-ui,sans-serif;line-height:1.8}a{color:var(--navy)}.wrap{max-width:760px;margin:0 auto;padding:0 16px}.wide{max-width:1080px;margin:0 auto;padding:0 16px}main.main-wide{padding:0}.site-header{border-bottom:1px solid var(--line);z-index:10;background:#fff;position:sticky;top:0}.header-inner{flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;min-height:56px;display:flex}.logo{color:var(--ink);font-weight:700;text-decoration:none}nav{flex-wrap:wrap;gap:16px;font-size:14px;display:flex}nav a{color:var(--ink);text-decoration:none}.nav-tel{font-weight:700;color:var(--navy)!important}main{padding:24px 16px 56px}h1{margin:8px 0 16px;font-size:24px;line-height:1.5}h2{border-left:4px solid var(--navy);margin:40px 0 12px;padding-left:10px;font-size:19px;line-height:1.5}h3{margin:28px 0 8px;font-size:16px}table{border-collapse:collapse;width:100%;margin:8px 0 4px;font-size:14px}th,td{border:1px solid var(--line);text-align:left;vertical-align:top;padding:8px 10px}th{background:var(--bg-soft);font-weight:500}.table-scroll{overflow-x:auto}.note{color:var(--sub);margin:4px 0 0;font-size:13px}.site-footer{border-top:1px solid var(--line);background:var(--bg-soft);color:var(--sub);padding:24px 0;font-size:13px}.site-footer p{margin:2px 0}.f-name{color:var(--ink);font-weight:700}.f-copy{margin-top:12px!important}@media (width<=600px){h1{font-size:21px}.header-inner{flex-wrap:nowrap;min-height:48px}.logo{flex:none;font-size:15px}nav{white-space:nowrap;scrollbar-width:none;flex-wrap:nowrap;gap:14px;font-size:13px;overflow-x:auto}}
+
+.preview-cta{display:inline-block;margin:0 0 14px;padding:10px 16px;background:#1a4b8e;color:white;border-radius:7px;text-decoration:none;font-weight:700}.hero .preview-cta{background:white;color:#172e4a;margin:0}
+.site-header .marumitsu-type{display:inline-grid;gap:3px;line-height:1.05;white-space:nowrap;color:#0c1829;padding-bottom:3px}.marumitsu-type .marumitsu-prefix{font-size:10px;letter-spacing:.18em;font-weight:600}.marumitsu-type strong{font-size:23px;letter-spacing:.025em}.marumitsu-core{border-bottom:2px solid #c8a84e;padding-bottom:2px}@media(max-width:600px){.marumitsu-type strong{font-size:19px}}
+.site-header .rotor-brand{display:inline-flex;align-items:center;gap:9px;padding-bottom:0}.rotor-wordmark{display:grid;gap:4px}.rotor-description{font-size:10px;font-weight:650;letter-spacing:.1em;color:#41546b}.rotor-icon{position:relative;flex:none;width:43px;height:39px}.rotor-disc{position:absolute;inset:2px 7px 2px 1px;border:4px solid #0c1829;border-radius:50%;box-shadow:inset 0 0 0 1px #62778c}.rotor-disc:before{content:"";position:absolute;inset:8px;border:2px solid #0c1829;border-radius:50%}.rotor-disc i{position:absolute;width:3px;height:3px;border-radius:50%;background:#0c1829}.rotor-disc i:nth-child(1){left:8px;top:2px}.rotor-disc i:nth-child(2){left:3px;top:12px}.rotor-disc i:nth-child(3){left:8px;bottom:2px}.rotor-caliper{position:absolute;right:1px;top:7px;width:15px;height:23px;background:#aa7d24;border:2px solid white;border-radius:4px 8px 8px 4px;transform:rotate(-14deg)}@media(max-width:600px){.rotor-icon{transform:scale(.86);width:39px}.rotor-description{font-size:9px}}
+.delivery-mark{position:relative;display:block;flex:none;width:52px;height:37px;color:#0c1829}.delivery-mark i{position:absolute;display:block}.truck-box{inset:4px 20px 11px 1px;border:2px solid currentColor;border-radius:3px;background:linear-gradient(to bottom,#fff 46%,#bb9240 46%,#bb9240 61%,#fff 61%)}.truck-cab{inset:10px 1px 10px 34px;background:currentColor;clip-path:polygon(0 0,63% 0,100% 45%,100% 100%,0 100%)}.truck-cab::before{content:"";position:absolute;inset:3px 3px auto 3px;height:6px;background:#fff;clip-path:polygon(0 0,58% 0,100% 100%,0 100%)}.truck-frame{inset:auto 1px 8px;height:4px;background:currentColor;border-radius:2px}.truck-wheel{bottom:3px;left:7px;width:11px;height:11px;background:currentColor;border:2px solid #fff;border-radius:50%}.truck-wheel:last-child{left:auto;right:5px}@media(max-width:600px){.delivery-mark{transform:scale(.88);margin-inline:-3px}}
+.delivery-mark{width:95px}.delivery-mark .truck-box{position:absolute;inset:4px 1px 11px 23px;display:grid;place-items:center;background:#fff;border-bottom-color:#aa7d24}.truck-lettering{color:#0c1829;font-size:7px;font-weight:700;line-height:1;white-space:nowrap}.delivery-mark .truck-cab{inset:10px auto 10px 1px;width:20px;transform:scaleX(-1)}.delivery-mark .truck-wheel{left:8px}.delivery-mark .truck-wheel:last-child{left:auto;right:12px}@media(max-width:600px){.delivery-mark{transform:none;margin-inline:0;width:89px}.truck-lettering{font-size:6.5px}}
+
+.site-header .rotor-brand{gap:0;padding:2px 0}
+.delivery-mark{width:181px;height:46px;color:#102138}
+.delivery-mark .truck-box{position:absolute;inset:2px 1px 11px 33px;display:grid;place-items:center;padding:0 4px 3px;border:0;border-radius:2px 3px 2px 2px;background:linear-gradient(to bottom,#102138 0 calc(100% - 3px),#c8a84e calc(100% - 3px));}
+.truck-lettering{color:#fff;font-size:18px;font-weight:700;letter-spacing:.07em;line-height:1;white-space:nowrap}
+.delivery-mark .truck-cab{inset:9px auto 9px 1px;width:34px;transform:scaleX(-1);clip-path:polygon(0 0,55% 0,73% 12%,100% 59%,100% 100%,0 100%);}
+.delivery-mark .truck-cab::before{inset:4px 5px auto 7px;height:9px;background:#e8eff6;clip-path:polygon(0 0,56% 0,100% 100%,0 100%);}
+.delivery-mark .truck-cab::after{content:"";position:absolute;right:0;bottom:4px;width:5px;height:3px;background:#c8a84e;}
+.delivery-mark .truck-frame{inset:auto 1px 8px;height:4px;}
+.delivery-mark .truck-wheel{bottom:1px;left:11px;width:13px;height:13px;border:1.5px solid #fff;background:radial-gradient(circle,#8391a0 0 21%,#102138 25%);}
+.delivery-mark .truck-wheel:last-child{left:auto;right:18px;}
+@media(max-width:600px){.delivery-mark{transform:none;margin-inline:0;width:157px;height:43px}.truck-lettering{font-size:15px;letter-spacing:.035em}}
+
+
+.delivery-mark{width:190px;height:49px}
+.delivery-mark .truck-box{inset:2px 2px 13px 48px;border-radius:2px;border-left:1px solid #53647a;border-right:2px solid #53647a}
+.delivery-mark .truck-cab{inset:8px auto 11px 5px;width:41px;transform:none;clip-path:polygon(21% 0,91% 0,100% 10%,100% 92%,76% 92%,73% 78%,65% 69%,53% 65%,40% 69%,31% 79%,28% 95%,0 95%,0 56%,5% 48%,8% 21%)}
+.delivery-mark .truck-cab::before{inset:4px auto auto 6px;width:30px;height:12px;background:linear-gradient(to right,#c2d6e8 0 26%,#102138 26% 33%,#e8eff6 33%);clip-path:polygon(15% 0,100% 0,100% 88%,46% 100%,0 90%)}
+.delivery-mark .truck-cab::after{right:auto;left:1px;bottom:5px;width:6px;height:3px;background:#d7b75b}
+.truck-door{left:35px;top:25px;width:6px;height:1px;background:#9cabbc}
+.truck-mirror{left:2px;top:17px;width:8px;height:4px;background:#102138;border-radius:2px 1px 1px 2px;box-shadow:1px 1px 0 #dce5ee}
+.truck-bumper{left:3px;bottom:10px;width:10px;height:3px;border-radius:1px;background:#617389}
+.delivery-mark .truck-frame{inset:auto 4px 10px 11px;height:4px}
+.delivery-mark .truck-wheel{left:20px;bottom:2px;width:14px;height:14px}
+.delivery-mark .truck-wheel:last-child{right:24px}
+@media(max-width:600px){.delivery-mark{width:168px;height:49px}}
+
+
+.main-wide .hero{box-sizing:border-box;max-width:1160px;margin:22px auto 0;width:calc(100% - 32px);border:7px double #1a4b8e;background:#f0f6fd;color:#0c1829}
+.hero .hero-inner{padding-top:42px;padding-bottom:36px}
+.hero .hero-kicker{color:#1a4b8e}
+.hero .hero-lead,.hero .hero-hours,.hero .hero-points span{color:#41546b}
+.hero .hero-points strong{color:#1a4b8e}
+.hero .hero-points{margin-top:24px}
+.hero .hero-points li{border-color:#c7d5e6;background:#fff}
+.hero .preview-cta,.hero .btn-ghost{display:inline-flex;align-items:center;padding:10px 16px;border:1px solid #1a4b8e;color:#1a4b8e;background:#fff}
+.hero .hero-catalog-link{color:#fff;background:#1a4b8e}
+@media(max-width:600px){.main-wide .hero{width:calc(100% - 20px);margin-top:12px;border-width:6px}.hero .hero-inner{padding:25px 14px}.hero .hero-actions>a{width:100%;justify-content:center;text-align:center}}
+
+.hero-text-panel{box-sizing:border-box;max-width:735px;margin:0 0 22px;padding:22px 26px;background:#fff;border:1px solid #c7d5e6;border-radius:8px}.hero .hero-text-panel .hero-lead{margin-bottom:0}@media(max-width:600px){.hero-text-panel{padding:16px 14px;margin-bottom:16px}}
+.main-wide #company{box-sizing:border-box;max-width:1160px;width:calc(100% - 32px);margin:22px auto;border:7px double #1a4b8e}@media(max-width:600px){.main-wide #company{width:calc(100% - 20px);margin:12px auto;border-width:6px}}
+.shop-logo-button.btn-navy{display:inline-flex;align-items:center;flex-wrap:wrap;justify-content:center;gap:12px;padding:11px 16px;border:1px solid #c7d5e6;background:#fff;color:#1a4b8e}.shop-logo-button img{display:block;width:158px;max-width:100%;height:auto}@media(max-width:600px){.shop-logo-button.btn-navy{box-sizing:border-box;max-width:100%;gap:8px 12px;padding:12px 14px;white-space:normal}.shop-logo-button img{width:clamp(142px,44vw,158px)}.shop-logo-button span{text-align:center}}.shop-logo-button:hover{border-color:#1a4b8e}
+.other-columns{margin-top:28px;padding-top:20px;border-top:1px solid #c7d5e6}.other-columns h3{margin:0 0 10px;font-size:18px}.aside-column-card{max-width:42rem;padding:14px 18px;background:#fff;border:1px solid #e3e7ee;border-left:4px solid #1a4b8e;border-radius:8px}.aside-column-card h4{margin:0 0 5px;font-size:16px}.aside-column-card p{margin:0;color:#41546b;font-size:14px}
+.top-maker-logos{display:grid;grid-template-columns:repeat(auto-fit,minmax(86px,1fr));gap:8px;margin:0;padding:0;list-style:none}.top-maker-logos li{display:grid;align-content:center;justify-items:center;gap:5px;min-height:78px;padding:7px 5px;text-align:center;font-size:11px;line-height:1.35;background:#fff;border:1px solid #e3e7ee;border-radius:7px;overflow-wrap:anywhere}.top-maker-logos img{display:block;width:100%;max-width:92px;height:40px;object-fit:contain}
+.part-choice-nav{display:block;overflow:visible;white-space:normal;margin:0 0 18px}.part-choice-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0;padding:0;list-style:none}.part-choice-list a{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:48px;padding:8px 12px;border:1px solid #c7d5e6;border-radius:7px;background:#fff;color:#1a4b8e;font-weight:700;text-decoration:none}.part-choice-list a:hover,.part-choice-list a:focus-visible{background:#eef5fc;border-color:#1a4b8e}.part-choice-list small{display:block;color:#52657c;font-weight:400}.bottom-part-choices{padding-block:20px 24px}.bottom-part-choices h2{margin-top:0}@media(max-width:800px){.part-choice-list{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:480px){.part-choice-list{grid-template-columns:1fr}}
+.footer-info-grid{display:grid;grid-template-columns:1fr auto;gap:22px 48px;align-items:start}.site-footer .footer-parts{display:block;white-space:normal;overflow:visible;text-align:left;min-width:180px}.site-footer .footer-parts h2{margin:0 0 6px;padding:0;border:0;font-size:14px}.footer-parts ul{margin:0;padding:0;list-style:none}.footer-parts li{margin:3px 0}.site-footer .footer-parts a{color:#1a4b8e;text-decoration:underline;text-underline-offset:2px}.footer-parts small{color:#52657c;margin-left:4px}@media(max-width:600px){.footer-info-grid{grid-template-columns:1fr;gap:14px}}
+.parts-menu-after-makers{margin:22px 0 0}</style>
 </BaseLayout>
 
 <style>

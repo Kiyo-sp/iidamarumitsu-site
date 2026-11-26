@@ -4,6 +4,9 @@ export const COMPANY = {
   shortName: "飯田丸光部品",
   tel: "0265-23-1231",
   telHref: "tel:0265231231",
+  fax: "050-6875-7344",
+  closed: "土曜日・日曜日・祝日、お盆・年末年始・GW",
+  email: "iidamarumitsu.1231@gmail.com",
   hours: "平日 8:30〜17:30",
   address: "〒395-0053 長野県飯田市大久保町2565-6",
   stores: [
