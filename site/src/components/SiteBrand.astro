@@ -1,9 +1,16 @@
 ---
+import { Image } from "astro:assets";
+import logo from "../assets/iida-marumitsu-header.png";
 import { COMPANY } from "../lib/site";
 ---
-<a class="site-brand" href="/" aria-label={`${COMPANY.name} ホーム`}>{COMPANY.shortName}</a>
+<a class="site-brand" href="/" aria-label={`${COMPANY.name} ホーム`}>
+  <Image src={logo} width={560} format="webp" alt="" loading="eager" />
+</a>
 
 <style>
-  a.site-brand { flex: none; color: #1a4b8e; font: 900 32px/1.25 "Yu Gothic", "Meiryo", sans-serif; letter-spacing: .06em; white-space: nowrap; text-decoration: none; text-shadow: 1px 2px #becbdb; }
-  @media (max-width: 600px) { a.site-brand { font-size: 23px; } }
+  .site-brand { display: block; flex: 0 1 auto; min-width: 0; }
+  .site-brand img { display: block; width: 248px; max-width: 100%; height: auto; }
+  @media (max-width: 600px) {
+    .site-brand img { width: clamp(144px, 44vw, 184px); }
+  }
 </style>
