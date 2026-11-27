@@ -1,5 +1,7 @@
 ---
 // トップ。記載は現行サイト（docs/）と、仕入・販売実績で確認できた事実だけ。
+import { Image } from "astro:assets";
+import logo from "../assets/iida-marumitsu-header.png";
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { COMPANY, POPULAR_PARTS, isPublic } from "../lib/site";
@@ -52,13 +54,27 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
 <BaseLayout
   title={`${COMPANY.name}｜長野県飯田市の自動車部品・工具卸売`}
   description="長野県飯田市の自動車部品・工具卸売。昭和53年創業。飯田本店と生田店の2拠点体制で1日複数回デリバリー。国産全メーカーの純正部品と主要な優良部品を取り扱っています。"
-  jsonLd={jsonLd} ogType="website" wide
+  jsonLd={jsonLd} ogType="website" wide showHeaderBrand={false}
 >
   <section class="hero">
     <div class="wide hero-inner">
-      <div class="hero-text-panel"><p class="hero-kicker">長野県飯田市の自動車部品・工具卸　昭和53年創業</p>
-      <h1>必要な部品を、<br />必要なときに。</h1>
-      <p class="hero-lead">飯田の中心部と北部の2拠点から、整備工場・ディーラーの現場へ1日に何度でもお届けします。</p>
+      <div class="hero-text-panel hero-company-panel">
+        <h1>
+          <Image src={logo} width={690} widths={[360, 690, 1380]} sizes="(max-width: 600px) calc(100vw - 92px), (max-width: 815px) calc(100vw - 130px), 690px" format="webp" alt={COMPANY.name} loading="eager" />
+        </h1>
+        <p class="hero-kicker">長野県飯田市の自動車部品・工具卸　昭和53年創業</p>
+        <div class="hero-company-details">
+          <nav class="hero-company-links" aria-label="主なご案内">
+            <a href="/parts/">取扱部品・用品</a>
+            <a href="/column/">部品コラム</a>
+            <a href="/business/">法人のお客様</a>
+            <a href="/company/">会社概要</a>
+          </nav>
+          <div class="hero-delivery">
+            <p class="hero-tagline">必要な部品を、必要なときに。</p>
+            <p class="hero-lead">飯田の中心部と北部の2拠点から、整備工場・ディーラーの現場へ1日に何度でもお届けします。</p>
+          </div>
+        </div>
       </div>
       <section class="hero-inquiry" aria-labelledby="hero-inquiry-heading">
         <h2 id="hero-inquiry-heading">在庫・適合を問い合わせる</h2>
@@ -387,5 +403,67 @@ const mapSrc = (q: string) => `https://maps.google.com/maps?q=${encodeURICompone
     .grid2, .grid3, .col-grid { grid-template-columns: 1fr; }
     .sec { padding: 26px 0; }
     .sec-title { font-size: 23px; }
+  }
+</style>
+
+<style>
+  .hero .hero-company-panel {
+    display: grid;
+    max-width: none;
+    min-height: 292px;
+    align-content: start;
+    padding: clamp(20px, 4vw, 42px);
+  }
+  .hero .hero-company-panel h1 { margin: 0 0 10px; }
+  .hero-company-panel h1 img { display: block; width: min(100%, 690px); height: auto; }
+  .hero .hero-company-panel .hero-kicker { margin: 0; }
+  .hero-company-details {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 430px);
+    align-items: start;
+    gap: 12px 20px;
+    margin-top: 10px;
+  }
+  .hero .hero-company-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-width: 0;
+    overflow: visible;
+  }
+  .hero-company-links a {
+    padding: 7px 10px;
+    border: 1px solid #c7d5e6;
+    border-radius: 5px;
+    background: #f5f8fc;
+    color: #1a4b8e;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .hero-company-links a:hover, .hero-company-links a:focus-visible {
+    background: #e7f0fc;
+    text-decoration: underline;
+  }
+  .hero-delivery {
+    padding-left: 18px;
+    border-left: 2px solid #c7d5e6;
+  }
+  .hero-tagline {
+    margin: 0 0 4px;
+    color: #0c1829;
+    font-size: clamp(16px, 2.2vw, 23px);
+    font-weight: 700;
+    line-height: 1.45;
+  }
+  .hero .hero-delivery .hero-lead { font-size: 13px; margin: 0; }
+  @media (max-width: 760px) {
+    .hero-company-details { grid-template-columns: minmax(0, 1fr); }
+    .hero-delivery { justify-self: end; max-width: 430px; }
+  }
+  @media (max-width: 600px) {
+    .hero .hero-company-panel { min-height: 0; padding: 18px 14px; }
+    .hero .hero-company-panel .hero-kicker { font-size: 12px; }
+    .hero-delivery { padding-left: 12px; }
   }
 </style>

@@ -3,8 +3,8 @@ import SiteBrand from "../components/SiteBrand.astro";
 import { COMPANY } from "../lib/site";
 import FooterPartsNav from "../components/FooterPartsNav.astro";
 import GoogleAnalytics from "../components/GoogleAnalytics.astro";
-interface Props { title: string; description: string; jsonLd?: object[]; noindex?: boolean; wide?: boolean; ogType?: string }
-const { title, description, jsonLd = [], noindex = false, wide = false, ogType = "article" } = Astro.props;
+interface Props { title: string; description: string; jsonLd?: object[]; noindex?: boolean; wide?: boolean; showHeaderBrand?: boolean; ogType?: string }
+const { title, description, jsonLd = [], noindex = false, wide = false, showHeaderBrand = true, ogType = "article" } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 <!doctype html>
@@ -29,8 +29,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 </head>
 <body>
   <header class="site-header">
-    <div class="wide header-inner">
-      <SiteBrand />
+    <div class:list={["wide", "header-inner", { "header-menu-only": !showHeaderBrand }]}>
+      {showHeaderBrand && <SiteBrand />}
       <nav>
         <a href="/parts/">取扱部品・用品</a>
         <a href="/company/">会社概要</a>
@@ -71,6 +71,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
   nav { display: flex; gap: 16px; font-size: 14px; flex-wrap: wrap; }
   .site-header nav { font-size: 16px; }
+  .header-menu-only, .header-menu-only nav { justify-content: center; }
   nav a { text-decoration: none; color: var(--ink); }
   .nav-tel { color: var(--navy) !important; font-weight: 700; }
   main { padding: 24px 16px 56px; }
@@ -92,6 +93,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
     nav { flex-wrap: nowrap; overflow-x: auto; gap: 14px; font-size: 13px; white-space: nowrap; scrollbar-width: none; }
     .site-header nav { font-size: 15px; }
+    .header-menu-only, .header-menu-only nav { justify-content: flex-start; }
   }
 </style>
 
